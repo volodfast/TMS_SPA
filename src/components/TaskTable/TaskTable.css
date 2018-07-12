@@ -1,0 +1,20 @@
+.task-table {
+    text-align: left;
+}
+
+.task-table table {
+    text-align: center;
+}
+
+.task-table button {
+    margin-left: 2px;
+    margin-right: 2px;
+}
+
+.task-table .select_buttons {
+    margin-bottom: 10px;
+}
+.task-table button:focus,
+.task-table button:active:hover {
+    outline: none;
+}
