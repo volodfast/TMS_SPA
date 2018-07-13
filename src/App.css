@@ -12,5 +12,6 @@ html, body {
 }
 
 body {
-  padding-top: 60px;
+  /* temporary fix for login page (!important) */
+  padding-top: 60px !important;
 }

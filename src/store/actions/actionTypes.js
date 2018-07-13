@@ -1,0 +1,9 @@
+export const AUTH_START = "AUTH_START";
+export const AUTH_SUCCESS = "AUTH_SUCCESS";
+export const AUTH_FAIL = "AUTH_FAIL";
+
+export const LOGOUT = "LOGOUT";
+
+export const LOAD_ALL_TASKS_START = "LOAD_ALL_TASKS_START";
+export const LOAD_ALL_TASKS_SUCCESS = "LOAD_ALL_TASKS_SUCCESS";
+export const LOAD_ALL_TASKS_FAIL = "LOAD_ALL_TASKS_FAIL";
