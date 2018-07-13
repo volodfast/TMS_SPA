@@ -1,3 +1,5 @@
+require 'active_support/core_ext/hash/except.rb'
+
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :update, :destroy]
 
@@ -10,7 +12,14 @@ class UsersController < ApplicationController
 
   # GET /users/1
   def show
-    render json: @user
+    user_info = {
+      id: @user.id,
+      first_name: @user.first_name,
+      last_name: @user.last_name,
+      email: @user.email
+    }
+
+    render json: user_info
   end
 
   # POST /users

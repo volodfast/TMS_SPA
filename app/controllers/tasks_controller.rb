@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   before_action :authenticate_user
+  before_action :current_user?
   before_action :set_task, only: [:show, :update, :destroy]
 
   # GET /tasks
@@ -42,6 +43,13 @@ class TasksController < ApplicationController
   end
 
   private
+    # See if this is current user
+    def current_user?
+      if current_user.id.to_s != params[:user_id]
+        render json: {status: "Can't give you someone else info"} , status: 401
+      end
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_task
       @task = Task.find(params[:id])
