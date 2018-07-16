@@ -23,7 +23,7 @@ export default props => {
         />
       </td>
       <td className="title">
-        <Link to={"/task/" + props.id}>{title}</Link>
+        <Link to={"/tasks/" + props.id}>{title}</Link>
       </td>
       <td className="due_date">{due_date}</td>
       <td className="priority">{props.priority}</td>

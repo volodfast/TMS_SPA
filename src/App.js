@@ -72,7 +72,7 @@ class App extends Component {
             component={TasksContainer}
           />
           <ProtectedRoute
-            path="/task/:task_id"
+            path="/tasks/:task_id"
             authenticated="auth"
             exact
             component={ShowTaskPageContainer}

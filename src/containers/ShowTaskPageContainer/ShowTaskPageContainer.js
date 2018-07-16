@@ -28,7 +28,11 @@ class ShowTaskPageContainer extends Component {
     const task = this.findTaskById(id);
 
     if (task === null) {
-      return <div>You have no such task!</div>;
+      return (
+        <div style={{ fontSize: "24px", marginTop: "15px" }}>
+          You have no such task!
+        </div>
+      );
     }
     return <ShowTaskPage {...task} />;
   }
