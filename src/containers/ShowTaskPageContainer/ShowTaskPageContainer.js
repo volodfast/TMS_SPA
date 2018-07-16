@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import ShowTaskPage from "../../components/ShowTaskPage/ShowTaskPage";
+import ShowTaskPage from "./ShowTaskPage/ShowTaskPage";
 
 class ShowTaskPageContainer extends Component {
   constructor(props) {

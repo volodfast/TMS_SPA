@@ -2,11 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Axios from "axios";
 
-import LoginPage from "../../components/LoginPage/LoginPage";
+import LoginPage from "./LoginPage/LoginPage";
 import * as actions from "../../store/actions/actions";
 import nav from "../../history/nav";
-
-import "./LoginPageContainer.css";
 
 class LoginPageContainer extends Component {
   constructor(props) {
