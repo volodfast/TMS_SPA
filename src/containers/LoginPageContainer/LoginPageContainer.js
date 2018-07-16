@@ -4,6 +4,7 @@ import Axios from "axios";
 
 import LoginPage from "../../components/LoginPage/LoginPage";
 import * as actions from "../../store/actions/actions";
+import nav from "../../history/nav";
 
 import "./LoginPageContainer.css";
 
@@ -54,6 +55,7 @@ class LoginPageContainer extends Component {
       .then(res => {
         const tasks = res.data;
         this.props.loadAllTasksSuccess(tasks);
+        nav("/");
       })
       .catch(err => {
         let errText = "Something went wrong!";

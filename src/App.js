@@ -2,10 +2,11 @@ import React, { Component } from "react";
 import { Route, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
-import Navigation from "./components/Navigation/Navigation";
+import Navigation from "./containers/Navigation/Navigation";
 import TasksContainer from "./components/TasksContainer/TasksContainer";
 import MainPageContainer from "./containers/MainPageContainer/MainPageContainer";
 import LoginPageContainer from "./containers/LoginPageContainer/LoginPageContainer";
+import ProtectedRoute from "./containers/ProtectedRoute/ProtectedRoute";
 
 import * as actions from "./store/actions/actions";
 
@@ -50,16 +51,33 @@ class App extends Component {
   }
 
   render() {
+    const auth = this.props.authenticated;
     return (
       <div className="App container">
         <Navigation />
-        <Route path="/" exact component={MainPageContainer} />
-        <Route path="/tasks" exact component={TasksContainer} />
+        <ProtectedRoute
+          path="/"
+          authenticated={auth}
+          exact
+          component={MainPageContainer}
+        />
+        <ProtectedRoute
+          path="/tasks"
+          authenticated={auth}
+          exact
+          component={TasksContainer}
+        />
         <Route path="/login" exact component={LoginPageContainer} />
       </div>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    authenticated: state.auth.authenticated
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -86,7 +104,7 @@ const mapDispatchToProps = dispatch => {
 
 export default withRouter(
   connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
   )(App)
 );
