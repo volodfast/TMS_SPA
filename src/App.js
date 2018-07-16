@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, withRouter } from "react-router-dom";
+import { Route, withRouter, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 
 import Navigation from "./containers/Navigation/Navigation";
@@ -9,6 +9,7 @@ import TasksContainer from "./components/TasksContainer/TasksContainer";
 import MainPageContainer from "./containers/MainPageContainer/MainPageContainer";
 import LoginPageContainer from "./containers/LoginPageContainer/LoginPageContainer";
 import ShowTaskPageContainer from "./containers/ShowTaskPageContainer/ShowTaskPageContainer";
+import NotFoundPage from "./components/NotFoundPage/NotFoundPage";
 
 import * as actions from "./store/actions/actions";
 
@@ -57,24 +58,28 @@ class App extends Component {
     return (
       <div className="App container">
         <Navigation />
-        <ProtectedRoute
-          path="/"
-          authenticated={auth}
-          exact
-          component={MainPageContainer}
-        />
-        <ProtectedRoute
-          path="/tasks"
-          authenticated={auth}
-          exact
-          component={TasksContainer}
-        />
-        <ProtectedRoute
-          path="/task/:task_id"
-          authenticated="auth"
-          component={ShowTaskPageContainer}
-        />
-        <Route path="/login" exact component={LoginPageContainer} />
+        <Switch>
+          <ProtectedRoute
+            path="/"
+            authenticated={auth}
+            exact
+            component={MainPageContainer}
+          />
+          <ProtectedRoute
+            path="/tasks"
+            authenticated={auth}
+            exact
+            component={TasksContainer}
+          />
+          <ProtectedRoute
+            path="/task/:task_id"
+            authenticated="auth"
+            exact
+            component={ShowTaskPageContainer}
+          />
+          <Route path="/login" exact component={LoginPageContainer} />
+          <Route component={NotFoundPage} />
+        </Switch>
       </div>
     );
   }
