@@ -3,10 +3,12 @@ import { Route, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
 import Navigation from "./containers/Navigation/Navigation";
+import ProtectedRoute from "./containers/ProtectedRoute/ProtectedRoute";
+
 import TasksContainer from "./components/TasksContainer/TasksContainer";
 import MainPageContainer from "./containers/MainPageContainer/MainPageContainer";
 import LoginPageContainer from "./containers/LoginPageContainer/LoginPageContainer";
-import ProtectedRoute from "./containers/ProtectedRoute/ProtectedRoute";
+import ShowTaskPageContainer from "./containers/ShowTaskPageContainer/ShowTaskPageContainer";
 
 import * as actions from "./store/actions/actions";
 
@@ -66,6 +68,11 @@ class App extends Component {
           authenticated={auth}
           exact
           component={TasksContainer}
+        />
+        <ProtectedRoute
+          path="/task/:task_id"
+          authenticated="auth"
+          component={ShowTaskPageContainer}
         />
         <Route path="/login" exact component={LoginPageContainer} />
       </div>

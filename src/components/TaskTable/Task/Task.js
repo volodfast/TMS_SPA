@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import { formatDate, formatTitle } from "../../../helpers/helpers";
 
@@ -22,7 +23,7 @@ export default props => {
         />
       </td>
       <td className="title">
-        <a href={link}>{title}</a>
+        <Link to={"/task/" + props.id}>{title}</Link>
       </td>
       <td className="due_date">{due_date}</td>
       <td className="priority">{props.priority}</td>
