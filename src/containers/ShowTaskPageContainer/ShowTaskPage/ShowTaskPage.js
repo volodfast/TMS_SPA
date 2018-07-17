@@ -53,7 +53,9 @@ const ShowTaskPage = props => {
         </div>
 
         <div className="col-md-2">
-          <button className="btn btn-warning">Edit Task</button>
+          <Link to={`/tasks/${props.id}/edit`} className="btn btn-warning">
+            Edit Task
+          </Link>
         </div>
 
         <div className="col-md-2">

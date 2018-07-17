@@ -11,7 +11,10 @@ import {
   CREATE_TASK_FAIL,
   DELETE_TASK_START,
   DELETE_TASK_SUCCESS,
-  DELETE_TASK_FAIL
+  DELETE_TASK_FAIL,
+  EDIT_TASK_START,
+  EDIT_TASK_SUCCESS,
+  EDIT_TASK_FAIL
 } from "./actions/actionTypes";
 
 const initialState = {
@@ -35,7 +38,11 @@ const initialState = {
     },
     deletion: {
       deleting: false,
-      deleted: true
+      deleted: false
+    },
+    update: {
+      updating: false,
+      updated: false
     }
   },
   errors: []
@@ -69,6 +76,13 @@ export default function(state = initialState, action) {
       return delete_task_success(state, action);
     case DELETE_TASK_FAIL:
       return delete_task_fail(state, action);
+    case EDIT_TASK_START:
+      return edit_task_start(state, action);
+    case EDIT_TASK_SUCCESS:
+      return edit_task_success(state, action);
+    case EDIT_TASK_FAIL:
+      return edit_task_fail(state, action);
+
     default:
       return state;
   }
@@ -253,6 +267,67 @@ function delete_task_fail(state, action) {
       deletion: {
         deleting: false,
         deleted: true
+      }
+    }
+  };
+}
+
+// Edit task reducer helpers
+
+function edit_task_start(state, action) {
+  return {
+    ...state,
+    tasks: {
+      ...state.tasks,
+      update: {
+        updating: true,
+        updated: false
+      }
+    }
+  };
+}
+
+function edit_task_success(state, action) {
+  const updatedTask = action.task;
+  const activeTasks = state.tasks.active;
+  const finishedTasks = state.tasks.finished;
+
+  const updatedActiveTasks = activeTasks.map(task => {
+    if (task.id === updatedTask.id) {
+      return updatedTask;
+    }
+    return task;
+  });
+
+  const updatedFinishedTasks = finishedTasks.map(task => {
+    if (task.id === updatedTask.id) {
+      return updatedTask;
+    }
+    return task;
+  });
+
+  return {
+    ...state,
+    tasks: {
+      ...state.tasks,
+      active: updatedActiveTasks,
+      finished: updatedFinishedTasks,
+      update: {
+        updating: false,
+        updated: true
+      }
+    }
+  };
+}
+
+function edit_task_fail(state, action) {
+  return {
+    ...state,
+    tasks: {
+      ...state.tasks,
+      update: {
+        updating: false,
+        updated: false
       }
     }
   };

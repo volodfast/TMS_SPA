@@ -13,7 +13,7 @@
     transform: translateX(0);
 }
 
-.task .edit_task input,
-.task .delete_task input{
+.task .edit_task a,
+.task .delete_task a{
     width: 90%;
 }

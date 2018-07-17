@@ -11,7 +11,10 @@ import {
   CREATE_TASK_FAIL,
   DELETE_TASK_START,
   DELETE_TASK_SUCCESS,
-  DELETE_TASK_FAIL
+  DELETE_TASK_FAIL,
+  EDIT_TASK_START,
+  EDIT_TASK_SUCCESS,
+  EDIT_TASK_FAIL
 } from "./actionTypes";
 
 // TASKS load
@@ -107,5 +110,24 @@ export const deleteTaskSuccess = taskId => {
 export const deleteTaskFail = () => {
   return {
     type: DELETE_TASK_FAIL
+  };
+};
+
+// Edit task actions
+
+export const editTaskStart = () => {
+  return {
+    type: EDIT_TASK_START
+  };
+};
+export const editTaskSuccess = task => {
+  return {
+    type: EDIT_TASK_SUCCESS,
+    task: task
+  };
+};
+export const editTaskFail = () => {
+  return {
+    type: EDIT_TASK_FAIL
   };
 };
