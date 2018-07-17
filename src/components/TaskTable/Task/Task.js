@@ -8,7 +8,7 @@ import "./Task.css";
 export default props => {
   const link = "#";
   const due_date = formatDate(props.due_date);
-  const title = formatTitle(props.title);
+  const title = formatTitle(props.title, 15);
   return (
     <tr id={"task-" + props.id} className="task">
       <td className="active_checkbox">

@@ -28,6 +28,6 @@ export function formatDate(date) {
 }
 
 export function formatTitle(string, num) {
-  if (string.length <= num) return string;
-  return string.slice(0, 21) + "...";
+  if (string.length < num) return string;
+  return string.slice(0, num - 1) + "...";
 }

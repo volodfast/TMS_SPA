@@ -1,11 +1,14 @@
 import {
-  LOAD_ALL_TASKS_START,
-  LOAD_ALL_TASKS_SUCCESS,
-  LOAD_ALL_TASKS_FAIL,
   AUTH_START,
   AUTH_SUCCESS,
   AUTH_FAIL,
-  LOGOUT
+  LOGOUT,
+  LOAD_ALL_TASKS_START,
+  LOAD_ALL_TASKS_SUCCESS,
+  LOAD_ALL_TASKS_FAIL,
+  CREATE_TASK_START,
+  CREATE_TASK_SUCCESS,
+  CREATE_TASK_FAIL
 } from "./actionTypes";
 
 // TASKS load
@@ -59,5 +62,26 @@ export const logout = () => {
   localStorage.removeItem("tms-user-id");
   return {
     type: LOGOUT
+  };
+};
+
+// Create_task actions
+
+export const createTaskStart = () => {
+  return {
+    type: CREATE_TASK_START
+  };
+};
+
+export const createTaskSuccess = task => {
+  return {
+    type: CREATE_TASK_SUCCESS,
+    task: task
+  };
+};
+
+export const createTaskFail = () => {
+  return {
+    type: CREATE_TASK_FAIL
   };
 };

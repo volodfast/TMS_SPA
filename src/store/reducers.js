@@ -1,11 +1,14 @@
 import {
-  LOAD_ALL_TASKS_START,
-  LOAD_ALL_TASKS_SUCCESS,
-  LOAD_ALL_TASKS_FAIL,
   AUTH_START,
   AUTH_SUCCESS,
   AUTH_FAIL,
-  LOGOUT
+  LOGOUT,
+  LOAD_ALL_TASKS_START,
+  LOAD_ALL_TASKS_SUCCESS,
+  LOAD_ALL_TASKS_FAIL,
+  CREATE_TASK_START,
+  CREATE_TASK_SUCCESS,
+  CREATE_TASK_FAIL
 } from "./actions/actionTypes";
 
 const initialState = {
@@ -22,19 +25,17 @@ const initialState = {
   tasks: {
     active: [],
     finished: [],
-    loading: false
+    loading: false,
+    creation: {
+      creating: false,
+      created: false
+    }
   },
   errors: []
 };
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    case LOAD_ALL_TASKS_START:
-      return load_all_tasks_start(state, action);
-    case LOAD_ALL_TASKS_SUCCESS:
-      return load_all_tasks_success(state, action);
-    case LOAD_ALL_TASKS_FAIL:
-      return load_all_tasks_fail(state, action);
     case AUTH_START:
       return auth_start(state, action);
     case AUTH_SUCCESS:
@@ -43,6 +44,18 @@ export default function(state = initialState, action) {
       return auth_fail(state, action);
     case LOGOUT:
       return logout(state, action);
+    case LOAD_ALL_TASKS_START:
+      return load_all_tasks_start(state, action);
+    case LOAD_ALL_TASKS_SUCCESS:
+      return load_all_tasks_success(state, action);
+    case LOAD_ALL_TASKS_FAIL:
+      return load_all_tasks_fail(state, action);
+    case CREATE_TASK_START:
+      return create_task_start(state, action);
+    case CREATE_TASK_SUCCESS:
+      return create_task_success(state, action);
+    case CREATE_TASK_FAIL:
+      return create_task_fail(state, action);
     default:
       return state;
   }
@@ -132,4 +145,46 @@ function auth_fail(state, action) {
 
 function logout(state, action) {
   return initialState;
+}
+
+// Create task reducer handlers
+
+function create_task_start(state, action) {
+  return {
+    ...state,
+    tasks: {
+      ...state.tasks,
+      creation: {
+        creating: true,
+        created: false
+      }
+    }
+  };
+}
+
+function create_task_success(state, action) {
+  return {
+    ...state,
+    tasks: {
+      ...state.tasks,
+      active: [action.task, ...state.tasks.active],
+      creation: {
+        creating: false,
+        created: true
+      }
+    }
+  };
+}
+
+function create_task_fail(state, action) {
+  return {
+    ...state,
+    tasks: {
+      ...state.tasks,
+      creation: {
+        creating: false,
+        created: false
+      }
+    }
+  };
 }

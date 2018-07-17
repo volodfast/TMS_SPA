@@ -37,7 +37,7 @@ class App extends Component {
 
           return Axios.get(`${baseUrl}/tasks`, {
             headers: {
-              Authorization: token
+              Authorization: "Bearer " + token
             }
           });
         })

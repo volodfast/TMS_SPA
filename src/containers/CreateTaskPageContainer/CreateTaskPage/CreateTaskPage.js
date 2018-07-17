@@ -21,7 +21,7 @@ const CreateTaskPage = props => {
 
       {errors}
       <div className="row">
-        <div className="col-md-4 col-md-offset-4 input-block">
+        <form className="col-md-4 col-md-offset-4 input-block">
           <label htmlFor="task_title">Title</label>
           <input
             type="text"
@@ -63,31 +63,12 @@ const CreateTaskPage = props => {
             onChange={props.handleDescriptionChange}
           />
           <input
-            type="button"
+            type="submit"
             value="Create task"
             className="btn btn-primary"
             onClick={props.handleSubmit}
           />
-
-          {/* <%= form_for(@task, url: user_tasks_path(@user.id)) do |f| %>
-        <%= render 'shared/task_error_messages' %>
-        <ul class="errors_js"></ul>
-        <%= f.label :title %>
-        <%= f.text_field :title, class: 'form-control' %>
-  
-        <%= f.label :priority %>
-        <%= f.number_field :priority, in: 0..10, step: 1, class: 'form-control' %>
-        
-        <%= f.label :due_date %>
-        <%= f.text_field :due_date, class: 'datepicker form-control' %>
-  
-        <%= f.label :description %>
-        <%= f.text_area :description, size: "24x6", class: 'form-control' %>
-  
-  
-        <%= f.submit "Create task", class: "btn btn-primary", data: {disable_with: false} %>
-      <% end %> */}
-        </div>
+        </form>
       </div>
     </div>
   );

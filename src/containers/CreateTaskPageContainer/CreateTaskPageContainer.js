@@ -1,9 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import axios from "axios";
+
+import moment from "moment";
+import Axios from "axios";
 
 import CreateTaskPage from "./CreateTaskPage/CreateTaskPage";
-import moment from "moment";
+
+import * as actions from "../../store/actions/actions";
+import nav from "../../history/nav";
 
 class CreateTaskPageContainer extends Component {
   constructor(props) {
@@ -60,10 +64,38 @@ class CreateTaskPageContainer extends Component {
     e.preventDefault();
     this.showState();
     if (!this.validateBeforeSend()) {
-      console.log("not Valid");
       return;
     }
-    console.log("Valid");
+    const token = localStorage.getItem("tms-jwt");
+    const link = `/api/users/${this.props.userId}/tasks`;
+    this.props.createTaskStart();
+    Axios.post(
+      link,
+      {
+        task: {
+          title: this.state.title,
+          priority: this.state.priority,
+          due_date: new Date(this.state.due_date),
+          description: this.state.description
+        }
+      },
+      {
+        headers: {
+          Authorization: "Bearer " + token
+        }
+      }
+    )
+      .then(res => {
+        this.props.createTaskSuccess(res.data);
+        nav("/");
+      })
+      .catch(err => {
+        this.props.createTaskFail();
+        console.log(err);
+        this.setState({
+          errors: ["Something went wrong!"]
+        });
+      });
   }
 
   validateBeforeSend() {
@@ -108,4 +140,21 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(CreateTaskPageContainer);
+function mapDispatchToProps(dispatch) {
+  return {
+    createTaskStart: () => {
+      dispatch(actions.createTaskStart());
+    },
+    createTaskSuccess: task => {
+      dispatch(actions.createTaskSuccess(task));
+    },
+    createTaskFail: () => {
+      dispatch(actions.createTaskFail());
+    }
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(CreateTaskPageContainer);
