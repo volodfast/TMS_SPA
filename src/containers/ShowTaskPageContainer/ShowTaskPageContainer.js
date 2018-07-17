@@ -30,7 +30,6 @@ class ShowTaskPageContainer extends Component {
 
   handleDelete(e) {
     e.preventDefault();
-    console.log("Hello from DELETE");
     const userId = this.props.userId;
     const taskId = +this.props.match.params.task_id;
     const link = `/api/users/${userId}/tasks/${taskId}`;
