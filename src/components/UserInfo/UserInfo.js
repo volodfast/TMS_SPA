@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import { formatDate } from "../../helpers/helpers";
 
@@ -14,9 +14,9 @@ export default props => {
         Today is: <span className="dateline">{date}</span>
       </p>
 
-      <NavLink to="/tasks" className="btn btn-primary">
+      <Link to="/tasks/new" className="btn btn-primary">
         Create New Task
-      </NavLink>
+      </Link>
     </section>
   );
 };

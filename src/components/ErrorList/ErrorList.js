@@ -5,13 +5,13 @@ import Error from "./Error/Error";
 import "./ErrorList.css";
 
 export default props => {
-    let errors = null;
+  let errors = null;
 
-    if (props.errors) {
-        errors = props.errors.map(error => {
-            return <Error key={error.status} message={error.message} />;
-        });
-    }
+  if (props.errors) {
+    errors = props.errors.map((error, i) => {
+      return <Error key={"error-" + i} message={error} />;
+    });
+  }
 
-    return <ul className="error-list">{errors}</ul>;
+  return <ul className="error-list">{errors}</ul>;
 };

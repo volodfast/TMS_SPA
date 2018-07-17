@@ -9,6 +9,7 @@ import TasksContainer from "./components/TasksContainer/TasksContainer";
 import MainPageContainer from "./containers/MainPageContainer/MainPageContainer";
 import LoginPageContainer from "./containers/LoginPageContainer/LoginPageContainer";
 import ShowTaskPageContainer from "./containers/ShowTaskPageContainer/ShowTaskPageContainer";
+import CreateTaskPageContainer from "./containers/CreateTaskPageContainer/CreateTaskPageContainer";
 import NotFoundPage from "./components/NotFoundPage/NotFoundPage";
 
 import * as actions from "./store/actions/actions";
@@ -72,8 +73,14 @@ class App extends Component {
             component={TasksContainer}
           />
           <ProtectedRoute
+            path="/tasks/new"
+            authenticated={auth}
+            exact
+            component={CreateTaskPageContainer}
+          />
+          <ProtectedRoute
             path="/tasks/:task_id"
-            authenticated="auth"
+            authenticated={auth}
             exact
             component={ShowTaskPageContainer}
           />
