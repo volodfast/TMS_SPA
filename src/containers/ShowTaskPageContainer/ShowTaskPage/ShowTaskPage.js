@@ -57,7 +57,9 @@ const ShowTaskPage = props => {
         </div>
 
         <div className="col-md-2">
-          <button className="btn btn-danger">Delete task</button>
+          <button className="btn btn-danger" onClick={props.handleDelete}>
+            Delete task
+          </button>
         </div>
       </div>
     </div>

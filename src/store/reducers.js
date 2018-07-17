@@ -8,7 +8,10 @@ import {
   LOAD_ALL_TASKS_FAIL,
   CREATE_TASK_START,
   CREATE_TASK_SUCCESS,
-  CREATE_TASK_FAIL
+  CREATE_TASK_FAIL,
+  DELETE_TASK_START,
+  DELETE_TASK_SUCCESS,
+  DELETE_TASK_FAIL
 } from "./actions/actionTypes";
 
 const initialState = {
@@ -29,6 +32,10 @@ const initialState = {
     creation: {
       creating: false,
       created: false
+    },
+    deletion: {
+      deleting: false,
+      deleted: true
     }
   },
   errors: []
@@ -56,6 +63,12 @@ export default function(state = initialState, action) {
       return create_task_success(state, action);
     case CREATE_TASK_FAIL:
       return create_task_fail(state, action);
+    case DELETE_TASK_START:
+      return delete_task_start(state, action);
+    case DELETE_TASK_SUCCESS:
+      return delete_task_success(state, action);
+    case DELETE_TASK_FAIL:
+      return delete_task_fail(state, action);
     default:
       return state;
   }
@@ -184,6 +197,62 @@ function create_task_fail(state, action) {
       creation: {
         creating: false,
         created: false
+      }
+    }
+  };
+}
+
+// Delete task reducer helpers
+
+function delete_task_start(state, action) {
+  return {
+    ...state,
+    tasks: {
+      ...state.tasks,
+      deletion: {
+        deleting: true,
+        deleted: false
+      }
+    }
+  };
+}
+
+function delete_task_success(state, action) {
+  const taskId = action.taskId;
+  const activeTasks = state.tasks.active;
+  const finishedTasks = state.tasks.finished;
+
+  const filteredActiveTasks = activeTasks.filter(task => {
+    if (task.id === taskId) return false;
+    return true;
+  });
+
+  const filteredFinishedTasks = finishedTasks.filter(task => {
+    if (task.id === taskId) return false;
+    return true;
+  });
+  return {
+    ...state,
+    tasks: {
+      ...state.tasks,
+      active: filteredActiveTasks,
+      finished: filteredFinishedTasks,
+      deletion: {
+        deleting: false,
+        deleted: false
+      }
+    }
+  };
+}
+
+function delete_task_fail(state, action) {
+  return {
+    ...state,
+    tasks: {
+      ...state.tasks,
+      deletion: {
+        deleting: false,
+        deleted: true
       }
     }
   };

@@ -1,13 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import Axios from "axios";
 
 import ShowTaskPage from "./ShowTaskPage/ShowTaskPage";
+
+import * as actions from "../../store/actions/actions";
+import nav from "../../history/nav";
 
 class ShowTaskPageContainer extends Component {
   constructor(props) {
     super(props);
 
     this.findTaskById = this.findTaskById.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   findTaskById(id) {
@@ -23,6 +28,33 @@ class ShowTaskPageContainer extends Component {
     return task;
   }
 
+  handleDelete(e) {
+    e.preventDefault();
+    console.log("Hello from DELETE");
+    const userId = this.props.userId;
+    const taskId = +this.props.match.params.task_id;
+    const link = `/api/users/${userId}/tasks/${taskId}`;
+    const token = localStorage.getItem("tms-jwt");
+    this.props.deleteTaskStart();
+    Axios.delete(link, {
+      headers: {
+        Authorization: "Bearer " + token
+      },
+      params: {
+        id: taskId
+      }
+    })
+      .then(res => {
+        this.props.deleteTaskSuccess(taskId);
+        nav("/");
+      })
+      .catch(err => {
+        console.log("FAIL DELETE");
+        console.dir(err);
+        this.props.deleteTaskFail();
+      });
+  }
+
   render() {
     const id = +this.props.match.params.task_id;
     const task = this.findTaskById(id);
@@ -34,15 +66,33 @@ class ShowTaskPageContainer extends Component {
         </div>
       );
     }
-    return <ShowTaskPage {...task} />;
+    return <ShowTaskPage {...task} handleDelete={this.handleDelete} />;
   }
 }
 
 function mapStateToProps(state) {
   return {
     activeTasks: state.tasks.active,
-    finishedTasks: state.tasks.finished
+    finishedTasks: state.tasks.finished,
+    userId: state.user.id
   };
 }
 
-export default connect(mapStateToProps)(ShowTaskPageContainer);
+function mapDispatchToProps(dispatch) {
+  return {
+    deleteTaskStart: () => {
+      dispatch(actions.deleteTaskStart());
+    },
+    deleteTaskSuccess: taskId => {
+      dispatch(actions.deleteTaskSuccess(taskId));
+    },
+    deleteTaskFail: () => {
+      dispatch(actions.deleteTaskFail());
+    }
+  };
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ShowTaskPageContainer);

@@ -4,8 +4,9 @@ import { Link } from "react-router-dom";
 import { formatDate, formatTitle } from "../../../helpers/helpers";
 
 import "./Task.css";
+import { connect } from "react-redux";
 
-export default props => {
+const Task = props => {
   const link = "#";
   const due_date = formatDate(props.due_date);
   const title = formatTitle(props.title, 15);
@@ -47,3 +48,12 @@ export default props => {
     </tr>
   );
 };
+
+function mapDispatchToProps(dispatch) {
+  return {};
+}
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Task);
