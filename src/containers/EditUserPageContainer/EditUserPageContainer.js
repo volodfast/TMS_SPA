@@ -19,7 +19,6 @@ class EditUserPageContainer extends Component {
       errors: []
     };
 
-    this.showState = this.showState.bind(this);
     this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
     this.handleLastNameChange = this.handleLastNameChange.bind(this);
     this.handleEmailChange = this.handleEmailChange.bind(this);
@@ -28,10 +27,6 @@ class EditUserPageContainer extends Component {
       this
     );
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  showState() {
-    console.log(this.state);
   }
 
   handleFirstNameChange(e) {
@@ -66,7 +61,6 @@ class EditUserPageContainer extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.showState();
     if (!this.validateBeforeSend()) {
       console.log("Invalid!");
       return;
