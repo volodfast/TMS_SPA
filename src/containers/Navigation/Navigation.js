@@ -18,7 +18,7 @@ const Navigation = props => {
             <Link to="/">Profile</Link>
           </li>
           <li>
-            <Link to="/">Settings</Link>
+            <Link to="/user/edit">Settings</Link>
           </li>
           <li className="divider" />
           <li>

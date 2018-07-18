@@ -11,6 +11,7 @@ import LoginPageContainer from "./containers/LoginPageContainer/LoginPageContain
 import ShowTaskPageContainer from "./containers/ShowTaskPageContainer/ShowTaskPageContainer";
 import CreateTaskPageContainer from "./containers/CreateTaskPageContainer/CreateTaskPageContainer";
 import EditTaskPageContainer from "./containers/EditTaskPageContainer/EditTaskPageContainer";
+import EditUserPageContainer from "./containers/EditUserPageContainer/EditUserPageContainer";
 import NotFoundPage from "./components/NotFoundPage/NotFoundPage";
 
 import * as actions from "./store/actions/actions";
@@ -90,6 +91,12 @@ class App extends Component {
             authenticated={auth}
             exact
             component={EditTaskPageContainer}
+          />
+          <ProtectedRoute
+            path="/user/edit"
+            authenticated={auth}
+            exact
+            component={EditUserPageContainer}
           />
           <Route path="/login" exact component={LoginPageContainer} />
           <Route component={NotFoundPage} />

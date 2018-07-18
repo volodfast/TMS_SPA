@@ -1,0 +1,16 @@
+.edit-user-container {
+  text-align: center;
+}
+
+.edit-user-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.edit-user-container input {
+  margin-bottom: 15px;
+}
+
+.edit-user-container .btn {
+  width: 100%;
+}

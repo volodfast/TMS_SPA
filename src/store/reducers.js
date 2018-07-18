@@ -14,7 +14,10 @@ import {
   DELETE_TASK_FAIL,
   EDIT_TASK_START,
   EDIT_TASK_SUCCESS,
-  EDIT_TASK_FAIL
+  EDIT_TASK_FAIL,
+  EDIT_USER_START,
+  EDIT_USER_SUCCESS,
+  EDIT_USER_FAIL
 } from "./actions/actionTypes";
 
 const initialState = {
@@ -26,7 +29,11 @@ const initialState = {
     id: null,
     email: "",
     first_name: "",
-    last_name: ""
+    last_name: "",
+    editing: {
+      updating: false,
+      updated: false
+    }
   },
   tasks: {
     active: [],
@@ -40,7 +47,7 @@ const initialState = {
       deleting: false,
       deleted: false
     },
-    update: {
+    editing: {
       updating: false,
       updated: false
     }
@@ -82,6 +89,12 @@ export default function(state = initialState, action) {
       return edit_task_success(state, action);
     case EDIT_TASK_FAIL:
       return edit_task_fail(state, action);
+    case EDIT_USER_START:
+      return edit_user_start(state, action);
+    case EDIT_USER_SUCCESS:
+      return edit_user_success(state, action);
+    case EDIT_USER_FAIL:
+      return edit_user_fail(state, action);
 
     default:
       return state;
@@ -279,7 +292,7 @@ function edit_task_start(state, action) {
     ...state,
     tasks: {
       ...state.tasks,
-      update: {
+      editing: {
         updating: true,
         updated: false
       }
@@ -312,7 +325,7 @@ function edit_task_success(state, action) {
       ...state.tasks,
       active: updatedActiveTasks,
       finished: updatedFinishedTasks,
-      update: {
+      editing: {
         updating: false,
         updated: true
       }
@@ -325,7 +338,51 @@ function edit_task_fail(state, action) {
     ...state,
     tasks: {
       ...state.tasks,
-      update: {
+      editing: {
+        updating: false,
+        updated: false
+      }
+    }
+  };
+}
+
+// Edit user reducer helpers
+
+function edit_user_start(state, action) {
+  return {
+    ...state,
+    user: {
+      ...state.user,
+      editing: {
+        updating: true,
+        updated: false
+      }
+    }
+  };
+}
+
+function edit_user_success(state, action) {
+  return {
+    ...state,
+    user: {
+      ...state.user,
+      first_name: action.first_name,
+      last_name: action.last_name,
+      email: action.email,
+      editing: {
+        updating: false,
+        updated: true
+      }
+    }
+  };
+}
+
+function edit_user_fail(state, action) {
+  return {
+    ...state,
+    user: {
+      ...state.user,
+      editing: {
         updating: false,
         updated: false
       }

@@ -14,7 +14,10 @@ import {
   DELETE_TASK_FAIL,
   EDIT_TASK_START,
   EDIT_TASK_SUCCESS,
-  EDIT_TASK_FAIL
+  EDIT_TASK_FAIL,
+  EDIT_USER_START,
+  EDIT_USER_SUCCESS,
+  EDIT_USER_FAIL
 } from "./actionTypes";
 
 // TASKS load
@@ -129,5 +132,28 @@ export const editTaskSuccess = task => {
 export const editTaskFail = () => {
   return {
     type: EDIT_TASK_FAIL
+  };
+};
+
+// Edit user actions
+
+export const editUserStart = () => {
+  return {
+    type: EDIT_USER_START
+  };
+};
+
+export const editUserSuccess = user => {
+  return {
+    type: EDIT_USER_SUCCESS,
+    first_name: user.first_name,
+    last_name: user.last_name,
+    email: user.email
+  };
+};
+
+export const editUserFail = () => {
+  return {
+    type: EDIT_USER_FAIL
   };
 };
