@@ -45,7 +45,7 @@ export default props => {
           />
         </form>
         <p>
-          New user? <Link to="/">Sing up now!</Link>
+          New user? <Link to="/signup">Sing up now!</Link>
         </p>
       </div>
     </div>

@@ -33,7 +33,7 @@ const Navigation = props => {
         <Link to="/login">Log In</Link>
       </li>
       <li>
-        <Link to="/">Sign Up</Link>
+        <Link to="/signup">Sign Up</Link>
       </li>
     </ul>
   );

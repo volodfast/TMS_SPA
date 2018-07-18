@@ -12,6 +12,7 @@ import ShowTaskPageContainer from "./containers/ShowTaskPageContainer/ShowTaskPa
 import CreateTaskPageContainer from "./containers/CreateTaskPageContainer/CreateTaskPageContainer";
 import EditTaskPageContainer from "./containers/EditTaskPageContainer/EditTaskPageContainer";
 import EditUserPageContainer from "./containers/EditUserPageContainer/EditUserPageContainer";
+import CreateUserPageContainer from "./containers/CreateUserPageContainer/CreateUserPageContainer";
 import NotFoundPage from "./components/NotFoundPage/NotFoundPage";
 
 import * as actions from "./store/actions/actions";
@@ -99,6 +100,7 @@ class App extends Component {
             component={EditUserPageContainer}
           />
           <Route path="/login" exact component={LoginPageContainer} />
+          <Route path="/signup" exect component={CreateUserPageContainer} />
           <Route component={NotFoundPage} />
         </Switch>
       </div>

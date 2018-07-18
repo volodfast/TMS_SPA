@@ -17,7 +17,10 @@ import {
   EDIT_TASK_FAIL,
   EDIT_USER_START,
   EDIT_USER_SUCCESS,
-  EDIT_USER_FAIL
+  EDIT_USER_FAIL,
+  CREATE_USER_START,
+  CREATE_USER_SUCCESS,
+  CREATE_USER_FAIL
 } from "./actions/actionTypes";
 
 const initialState = {
@@ -30,6 +33,10 @@ const initialState = {
     email: "",
     first_name: "",
     last_name: "",
+    creation: {
+      creating: false,
+      created: false
+    },
     editing: {
       updating: false,
       updated: false
@@ -95,6 +102,12 @@ export default function(state = initialState, action) {
       return edit_user_success(state, action);
     case EDIT_USER_FAIL:
       return edit_user_fail(state, action);
+    case CREATE_USER_START:
+      return create_user_start(state, action);
+    case CREATE_USER_SUCCESS:
+      return create_user_success(state, action);
+    case CREATE_USER_FAIL:
+      return create_user_fail(state, action);
 
     default:
       return state;
@@ -385,6 +398,51 @@ function edit_user_fail(state, action) {
       editing: {
         updating: false,
         updated: false
+      }
+    }
+  };
+}
+
+// Create user reducer helpers
+
+function create_user_start(state, action) {
+  return {
+    ...state,
+    user: {
+      ...state.user,
+      creation: {
+        creating: true,
+        created: false
+      }
+    }
+  };
+}
+
+function create_user_success(state, action) {
+  return {
+    ...state,
+    user: {
+      ...state.user,
+      id: action.id,
+      first_name: action.first_name,
+      last_name: action.last_name,
+      email: action.email,
+      creation: {
+        creating: true,
+        created: false
+      }
+    }
+  };
+}
+
+function create_user_fail(state, action) {
+  return {
+    ...state,
+    user: {
+      ...state.user,
+      creation: {
+        creating: false,
+        created: false
       }
     }
   };

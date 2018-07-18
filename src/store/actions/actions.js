@@ -17,7 +17,10 @@ import {
   EDIT_TASK_FAIL,
   EDIT_USER_START,
   EDIT_USER_SUCCESS,
-  EDIT_USER_FAIL
+  EDIT_USER_FAIL,
+  CREATE_USER_START,
+  CREATE_USER_SUCCESS,
+  CREATE_USER_FAIL
 } from "./actionTypes";
 
 // TASKS load
@@ -155,5 +158,29 @@ export const editUserSuccess = user => {
 export const editUserFail = () => {
   return {
     type: EDIT_USER_FAIL
+  };
+};
+
+// Create user actions
+
+export const createUserStart = () => {
+  return {
+    type: CREATE_USER_START
+  };
+};
+
+export const createUserSuccess = user => {
+  return {
+    type: CREATE_USER_SUCCESS,
+    id: user.id,
+    first_name: user.first_name,
+    last_name: user.last_name,
+    email: user.email
+  };
+};
+
+export const createUserFail = () => {
+  return {
+    type: CREATE_USER_FAIL
   };
 };
