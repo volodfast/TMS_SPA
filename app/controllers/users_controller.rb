@@ -1,7 +1,11 @@
 require 'active_support/core_ext/hash/except.rb'
 
 class UsersController < ApplicationController
+  before_action :authenticate_user
+  before_action :is_current_user, only: [:show, :update, :destroy]
   before_action :set_user, only: [:show, :update, :destroy]
+  
+  skip_before_action :authenticate_user, only: [:create]
 
   # GET /users
   def index
@@ -68,5 +72,11 @@ class UsersController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def user_params
       params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation)
+    end
+
+    def is_current_user
+      if current_user.id.to_s != params[:user_id]
+        render json: {status: "Can't give you someone else info"} , status: 401
+      end
     end
 end
