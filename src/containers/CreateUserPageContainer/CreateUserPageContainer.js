@@ -85,17 +85,20 @@ class CreateUserPageContainer extends Component {
         nav("/login");
       })
       .catch(err => {
-        let errorsObj = err.response.data;
-        let errors = [];
-        for (let title in errorsObj) {
-          for (let i = 0; i < errorsObj[title].length; i++) {
-            const errMsg = `${title} ${errorsObj[title][i]}`;
-            errors.push(errMsg);
+        if (err.response.status === 422) {
+          let errorsObj = err.response.data;
+          let errors = [];
+          for (let title in errorsObj) {
+            for (let i = 0; i < errorsObj[title].length; i++) {
+              const errMsg = `${title} ${errorsObj[title][i]}`;
+              errors.push(errMsg);
+            }
           }
+          this.setState({
+            errors: errors
+          });
         }
-        this.setState({
-          errors: errors
-        });
+
         console.dir(err);
         this.props.createUserFail();
       });
