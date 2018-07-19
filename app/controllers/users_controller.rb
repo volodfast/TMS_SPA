@@ -75,7 +75,7 @@ class UsersController < ApplicationController
     end
 
     def is_current_user
-      if current_user.id.to_s != params[:user_id]
+      if current_user.id.to_s != params[:id]
         render json: {status: "Can't give you someone else info"} , status: 401
       end
     end
