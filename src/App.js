@@ -21,7 +21,9 @@ import "./App.css";
 import Axios from "axios";
 
 class App extends Component {
-  componentDidMount() {
+  constructor(props) {
+    super(props);
+
     const token = localStorage.getItem("tms-jwt");
     const userId = localStorage.getItem("tms-user-id");
     if (token && userId) {
@@ -30,7 +32,12 @@ class App extends Component {
       let errType = 1;
       let errMsg = "Can't identify user by token!";
       this.props.authStart();
-      Axios.get(baseUrl)
+
+      Axios.get(baseUrl, {
+        headers: {
+          Authorization: "Bearer " + token
+        }
+      })
         .then(res => {
           errType = 2;
           errMsg = "Can't load user tasks!";
@@ -56,6 +63,8 @@ class App extends Component {
         });
     }
   }
+
+  componentDidMount() {}
 
   render() {
     const auth = this.props.authenticated;
@@ -110,7 +119,8 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    authenticated: state.auth.authenticated
+    authenticated: state.auth.authenticated,
+    authenticating: state.auth.authenticating
   };
 };
 
