@@ -42,3 +42,9 @@
 .react-datepicker__input-container {
   width: inherit;
 }
+
+.create-task-container .back-button {
+  left: 20vw;
+  position: absolute;
+  width: 150px;
+}

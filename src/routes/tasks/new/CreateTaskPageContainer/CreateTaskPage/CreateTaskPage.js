@@ -7,6 +7,8 @@ import "moment/locale/en-gb";
 
 import ErrorList from "../../../../../components/ErrorList/ErrorList";
 
+import history from "../../../../../history/history";
+
 import "./CreateTaskPage.css";
 
 const CreateTaskPage = props => {
@@ -17,6 +19,9 @@ const CreateTaskPage = props => {
 
   return (
     <div className="create-task-container">
+      <button onClick={history.goBack} className="btn btn-primary back-button">
+        Back
+      </button>
       <h1>Create New Task</h1>
 
       {errors}
