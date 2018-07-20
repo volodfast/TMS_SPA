@@ -43,7 +43,7 @@ const Task = props => {
           name="active"
           id={"checkbox-" + props.id}
           checked={props.selected}
-          onClick={() => {
+          onChange={() => {
             props.onToggleSelect(props.id);
           }}
         />

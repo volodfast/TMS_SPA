@@ -12,8 +12,14 @@ class TaskTable extends Component {
   constructor(props) {
     super(props);
 
+    let selectedIds = [];
+
+    if (props.selectedIds && props.selectedIds.length > 0) {
+      selectedIds = props.selectedIds;
+    }
+
     this.state = {
-      selectedIds: []
+      selectedIds: selectedIds
     };
 
     this.selectTask = this.selectTask.bind(this);
@@ -105,6 +111,10 @@ class TaskTable extends Component {
         console.dir(err);
         this.props.deleteMultipleTasksFail();
       });
+  }
+
+  componentWillUnmount() {
+    this.props.handleSelectedOnUnmount(this.state.selectedIds);
   }
 
   render() {

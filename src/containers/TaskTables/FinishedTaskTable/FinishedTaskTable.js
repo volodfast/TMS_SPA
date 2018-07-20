@@ -36,6 +36,8 @@ class FinishedTaskTable extends Component {
     return (
       <div className={classStyle} id={this.props.id}>
         <TaskTable
+          selectedIds={this.props.selectedFinished}
+          handleSelectedOnUnmount={this.props.addSelectedFinishedTaskIdsToCache}
           tasks={this.props.tasks}
           text={{
             default: "There are no finished tasks!",
@@ -50,7 +52,8 @@ class FinishedTaskTable extends Component {
 
 function mapStateToProps(state) {
   return {
-    userId: state.user.id
+    userId: state.user.id,
+    selectedFinished: state.cache.selectedIds.finished
   };
 }
 
@@ -64,6 +67,9 @@ function mapDispatchToProps(dispatch) {
     },
     updateActiveMultipleTasksFail: () => {
       dispatch(actions.updateActiveMultipleTasksFail());
+    },
+    addSelectedFinishedTaskIdsToCache: ids => {
+      dispatch(actions.addSelectedFinishedTaskIdsToCache(ids));
     }
   };
 }

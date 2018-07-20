@@ -27,7 +27,9 @@ import {
   UPDATE_ACTIVE_MULTIPLE_TASKS_START,
   UPDATE_ACTIVE_MULTIPLE_TASKS_SUCCESS,
   UPDATE_ACTIVE_MULTIPLE_TASKS_FAIL,
-  CHANGE_TASKS_ACTIVE_TAB
+  CHANGE_TASKS_ACTIVE_TAB,
+  ADD_SELECTED_ACTIVE_TASK_IDS_TO_CACHE,
+  ADD_SELECTED_FINISHED_TASK_IDS_TO_CACHE
 } from "./actionTypes";
 
 // TASKS load
@@ -213,7 +215,7 @@ export const deleteMultipleTasksFail = () => {
   };
 };
 
-// Update active multiple tasks action
+// Update active multiple tasks actions
 
 export const updateActiveMultipleTasksStart = () => {
   return {
@@ -235,11 +237,27 @@ export const updateActiveMultipleTasksFail = () => {
   };
 };
 
-// Change tasks active tab
+// Change tasks active tab action
 
 export const changeTasksActiveTab = activeTab => {
   return {
     type: CHANGE_TASKS_ACTIVE_TAB,
     activeTab: activeTab
+  };
+};
+
+// Add selected active, finished tasks to cache
+
+export const addSelectedActiveTaskIdsToCache = ids => {
+  return {
+    type: ADD_SELECTED_ACTIVE_TASK_IDS_TO_CACHE,
+    ids: ids
+  };
+};
+
+export const addSelectedFinishedTaskIdsToCache = ids => {
+  return {
+    type: ADD_SELECTED_FINISHED_TASK_IDS_TO_CACHE,
+    ids: ids
   };
 };

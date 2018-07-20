@@ -37,6 +37,8 @@ class ActiveTaskTable extends Component {
       <div className={classStyle} id={this.props.id}>
         <TaskTable
           active
+          selectedIds={this.props.selectedActive}
+          handleSelectedOnUnmount={this.props.addSelectedActiveTaskIdsToCache}
           tasks={this.props.tasks}
           text={{
             default: "There are no active tasks! Create new one!",
@@ -51,7 +53,8 @@ class ActiveTaskTable extends Component {
 
 function mapStateToProps(state) {
   return {
-    userId: state.user.id
+    userId: state.user.id,
+    selectedActive: state.cache.selectedIds.active
   };
 }
 
@@ -65,6 +68,9 @@ function mapDispatchToProps(dispatch) {
     },
     updateActiveMultipleTasksFail: () => {
       dispatch(actions.updateActiveMultipleTasksFail());
+    },
+    addSelectedActiveTaskIdsToCache: ids => {
+      dispatch(actions.addSelectedActiveTaskIdsToCache(ids));
     }
   };
 }

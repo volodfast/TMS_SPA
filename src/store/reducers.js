@@ -27,7 +27,9 @@ import {
   UPDATE_ACTIVE_MULTIPLE_TASKS_START,
   UPDATE_ACTIVE_MULTIPLE_TASKS_SUCCESS,
   UPDATE_ACTIVE_MULTIPLE_TASKS_FAIL,
-  CHANGE_TASKS_ACTIVE_TAB
+  CHANGE_TASKS_ACTIVE_TAB,
+  ADD_SELECTED_ACTIVE_TASK_IDS_TO_CACHE,
+  ADD_SELECTED_FINISHED_TASK_IDS_TO_CACHE
 } from "./actions/actionTypes";
 
 const initialState = {
@@ -73,6 +75,12 @@ const initialState = {
     multipleUpdating: {
       updating: false,
       updated: true
+    }
+  },
+  cache: {
+    selectedIds: {
+      active: [],
+      finished: []
     }
   },
   errors: []
@@ -147,6 +155,11 @@ export default function(state = initialState, action) {
 
     case CHANGE_TASKS_ACTIVE_TAB:
       return change_tasks_active_tab(state, action);
+
+    case ADD_SELECTED_ACTIVE_TASK_IDS_TO_CACHE:
+      return add_selected_active_task_ids_to_cache(state, action);
+    case ADD_SELECTED_FINISHED_TASK_IDS_TO_CACHE:
+      return add_selected_finished_task_ids_to_cache(state, action);
 
     default:
       return state;
@@ -633,6 +646,34 @@ function change_tasks_active_tab(state, action) {
     tasks: {
       ...state.tasks,
       activeTab: action.activeTab
+    }
+  };
+}
+
+// Add selected task ids to cache reducer helpers
+
+function add_selected_active_task_ids_to_cache(state, action) {
+  return {
+    ...state,
+    cache: {
+      ...state.cache,
+      selectedIds: {
+        ...state.cache.selectedIds,
+        active: action.ids
+      }
+    }
+  };
+}
+
+function add_selected_finished_task_ids_to_cache(state, action) {
+  return {
+    ...state,
+    cache: {
+      ...state.cache,
+      selectedIds: {
+        ...state.cache.selectedIds,
+        finished: action.ids
+      }
     }
   };
 }
