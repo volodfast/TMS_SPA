@@ -61,10 +61,7 @@ class EditUserPageContainer extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    if (!this.validateBeforeSend()) {
-      console.log("Invalid!");
-      return;
-    }
+    if (!this.validateBeforeSend()) return;
 
     let user = {
       first_name: this.state.first_name.trim(),

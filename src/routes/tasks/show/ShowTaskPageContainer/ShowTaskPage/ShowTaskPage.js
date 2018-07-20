@@ -13,7 +13,6 @@ const ShowTaskPage = props => {
   const active = props.active ? "Yes" : "No";
   const description = props.description;
 
-  console.dir(props);
   return (
     <div>
       <div className="task_show_block">

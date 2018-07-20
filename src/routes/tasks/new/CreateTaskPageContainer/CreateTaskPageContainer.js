@@ -27,12 +27,7 @@ class CreateTaskPageContainer extends Component {
     this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
-    this.showState = this.showState.bind(this);
     this.validateBeforeSend = this.validateBeforeSend.bind(this);
-  }
-
-  showState() {
-    console.dir(this.state);
   }
 
   handleTitleChange(e) {
@@ -62,7 +57,7 @@ class CreateTaskPageContainer extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
-    this.showState();
+
     if (!this.validateBeforeSend()) {
       return;
     }
