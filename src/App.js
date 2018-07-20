@@ -5,7 +5,6 @@ import { connect } from "react-redux";
 import Navigation from "./containers/Navigation/Navigation";
 import ProtectedRoute from "./containers/ProtectedRoute/ProtectedRoute";
 
-import TasksContainer from "./components/TasksContainer/TasksContainer";
 import MainPageContainer from "./containers/MainPageContainer/MainPageContainer";
 import LoginPageContainer from "./containers/LoginPageContainer/LoginPageContainer";
 import ShowTaskPageContainer from "./containers/ShowTaskPageContainer/ShowTaskPageContainer";
@@ -75,12 +74,6 @@ class App extends Component {
             authenticated={auth}
             exact
             component={MainPageContainer}
-          />
-          <ProtectedRoute
-            path="/tasks"
-            authenticated={auth}
-            exact
-            component={TasksContainer}
           />
           <ProtectedRoute
             path="/tasks/new"
