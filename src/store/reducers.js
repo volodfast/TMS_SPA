@@ -569,6 +569,11 @@ function update_active_multiple_tasks_success(state, action) {
     });
   }
 
+  tasks = tasks.map(task => {
+    task.active = isActive;
+    return task;
+  });
+
   let activeTasks;
   let finishedTasks;
 
