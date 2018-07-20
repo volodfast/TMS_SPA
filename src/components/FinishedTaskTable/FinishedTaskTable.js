@@ -30,8 +30,11 @@ class FinishedTaskTable extends Component {
   }
 
   render() {
+    const classStyle = this.props.isActive
+      ? "tab-pane fade active in"
+      : "tab-pane fade";
     return (
-      <div className="tab-pane fade" id={this.props.id}>
+      <div className={classStyle} id={this.props.id}>
         <TaskTable
           tasks={this.props.tasks}
           text={{

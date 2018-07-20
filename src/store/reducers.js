@@ -26,7 +26,8 @@ import {
   DELETE_MULTIPLE_TASKS_FAIL,
   UPDATE_ACTIVE_MULTIPLE_TASKS_START,
   UPDATE_ACTIVE_MULTIPLE_TASKS_SUCCESS,
-  UPDATE_ACTIVE_MULTIPLE_TASKS_FAIL
+  UPDATE_ACTIVE_MULTIPLE_TASKS_FAIL,
+  CHANGE_TASKS_ACTIVE_TAB
 } from "./actions/actionTypes";
 
 const initialState = {
@@ -52,6 +53,7 @@ const initialState = {
     active: [],
     finished: [],
     loading: false,
+    activeTab: "active",
     creation: {
       creating: false,
       created: false
@@ -142,6 +144,9 @@ export default function(state = initialState, action) {
       return update_active_multiple_tasks_success(state, action);
     case UPDATE_ACTIVE_MULTIPLE_TASKS_FAIL:
       return update_active_multiple_tasks_fail(state, action);
+
+    case CHANGE_TASKS_ACTIVE_TAB:
+      return change_tasks_active_tab(state, action);
 
     default:
       return state;
@@ -616,6 +621,18 @@ function update_active_multiple_tasks_fail(state, action) {
         updating: false,
         updated: false
       }
+    }
+  };
+}
+
+// Change tasks active tab reducer helper
+
+function change_tasks_active_tab(state, action) {
+  return {
+    ...state,
+    tasks: {
+      ...state.tasks,
+      activeTab: action.activeTab
     }
   };
 }

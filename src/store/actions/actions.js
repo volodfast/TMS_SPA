@@ -26,7 +26,8 @@ import {
   DELETE_MULTIPLE_TASKS_FAIL,
   UPDATE_ACTIVE_MULTIPLE_TASKS_START,
   UPDATE_ACTIVE_MULTIPLE_TASKS_SUCCESS,
-  UPDATE_ACTIVE_MULTIPLE_TASKS_FAIL
+  UPDATE_ACTIVE_MULTIPLE_TASKS_FAIL,
+  CHANGE_TASKS_ACTIVE_TAB
 } from "./actionTypes";
 
 // TASKS load
@@ -231,5 +232,14 @@ export const updateActiveMultipleTasksSuccess = (task_ids, isActive) => {
 export const updateActiveMultipleTasksFail = () => {
   return {
     type: UPDATE_ACTIVE_MULTIPLE_TASKS_FAIL
+  };
+};
+
+// Change tasks active tab
+
+export const changeTasksActiveTab = activeTab => {
+  return {
+    type: CHANGE_TASKS_ACTIVE_TAB,
+    activeTab: activeTab
   };
 };
