@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import ActiveTaskTable from "../ActiveTaskTable/ActiveTaskTable";
-import FinishedTaskTable from "../FinishedTaskTable/FinishedTaskTable";
+import ActiveTaskTable from "./ActiveTaskTable/ActiveTaskTable";
+import FinishedTaskTable from "./FinishedTaskTable/FinishedTaskTable";
 
 import * as actions from "../../store/actions/actions";
 

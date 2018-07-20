@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 
-import TaskTables from "../../components/TaskTables/TaskTables";
+import TaskTables from "../TaskTables/TaskTables";
 
 const TaskTablesContainer = props => {
   return (

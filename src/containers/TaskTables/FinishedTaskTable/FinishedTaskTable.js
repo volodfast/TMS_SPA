@@ -4,7 +4,7 @@ import Axios from "axios";
 
 import TaskTable from "../TaskTable/TaskTable";
 
-import * as actions from "../../store/actions/actions";
+import * as actions from "../../../store/actions/actions";
 
 class FinishedTaskTable extends Component {
   constructor(props) {

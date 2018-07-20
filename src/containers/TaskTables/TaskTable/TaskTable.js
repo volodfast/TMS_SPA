@@ -4,7 +4,7 @@ import Axios from "axios";
 
 import Task from "./Task/Task";
 
-import * as actions from "../../store/actions/actions";
+import * as actions from "../../../store/actions/actions";
 
 import "./TaskTable.css";
 
