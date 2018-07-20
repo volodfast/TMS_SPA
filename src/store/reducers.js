@@ -20,7 +20,13 @@ import {
   EDIT_USER_FAIL,
   CREATE_USER_START,
   CREATE_USER_SUCCESS,
-  CREATE_USER_FAIL
+  CREATE_USER_FAIL,
+  DELETE_MULTIPLE_TASKS_START,
+  DELETE_MULTIPLE_TASKS_SUCCESS,
+  DELETE_MULTIPLE_TASKS_FAIL,
+  UPDATE_ACTIVE_MULTIPLE_TASKS_START,
+  UPDATE_ACTIVE_MULTIPLE_TASKS_SUCCESS,
+  UPDATE_ACTIVE_MULTIPLE_TASKS_FAIL
 } from "./actions/actionTypes";
 
 const initialState = {
@@ -57,6 +63,10 @@ const initialState = {
     editing: {
       updating: false,
       updated: false
+    },
+    multipleDeletion: {
+      deleting: false,
+      deleted: true
     }
   },
   errors: []
@@ -72,42 +82,62 @@ export default function(state = initialState, action) {
       return auth_fail(state, action);
     case LOGOUT:
       return logout(state, action);
+
     case LOAD_ALL_TASKS_START:
       return load_all_tasks_start(state, action);
     case LOAD_ALL_TASKS_SUCCESS:
       return load_all_tasks_success(state, action);
     case LOAD_ALL_TASKS_FAIL:
       return load_all_tasks_fail(state, action);
+
     case CREATE_TASK_START:
       return create_task_start(state, action);
     case CREATE_TASK_SUCCESS:
       return create_task_success(state, action);
     case CREATE_TASK_FAIL:
       return create_task_fail(state, action);
+
     case DELETE_TASK_START:
       return delete_task_start(state, action);
     case DELETE_TASK_SUCCESS:
       return delete_task_success(state, action);
     case DELETE_TASK_FAIL:
       return delete_task_fail(state, action);
+
     case EDIT_TASK_START:
       return edit_task_start(state, action);
     case EDIT_TASK_SUCCESS:
       return edit_task_success(state, action);
     case EDIT_TASK_FAIL:
       return edit_task_fail(state, action);
+
     case EDIT_USER_START:
       return edit_user_start(state, action);
     case EDIT_USER_SUCCESS:
       return edit_user_success(state, action);
     case EDIT_USER_FAIL:
       return edit_user_fail(state, action);
+
     case CREATE_USER_START:
       return create_user_start(state, action);
     case CREATE_USER_SUCCESS:
       return create_user_success(state, action);
     case CREATE_USER_FAIL:
       return create_user_fail(state, action);
+
+    case DELETE_MULTIPLE_TASKS_START:
+      return delete_multiple_tasks_start(state, action);
+    case DELETE_MULTIPLE_TASKS_SUCCESS:
+      return delete_multiple_tasks_success(state, action);
+    case DELETE_MULTIPLE_TASKS_FAIL:
+      return delete_multiple_tasks_fail(state, action);
+
+    case UPDATE_ACTIVE_MULTIPLE_TASKS_START:
+      return update_active_multiple_tasks_start(state, action);
+    case UPDATE_ACTIVE_MULTIPLE_TASKS_SUCCESS:
+      return update_active_multiple_tasks_success(state, action);
+    case UPDATE_ACTIVE_MULTIPLE_TASKS_FAIL:
+      return update_active_multiple_tasks_fail(state, action);
 
     default:
       return state;
@@ -445,5 +475,80 @@ function create_user_fail(state, action) {
         created: false
       }
     }
+  };
+}
+
+// Delete multiple users reducer helpers
+
+function delete_multiple_tasks_start(state, action) {
+  return {
+    ...state,
+    tasks: {
+      ...state.tasks,
+      multipleDeletion: {
+        deleting: true,
+        deleted: false
+      }
+    }
+  };
+}
+
+function delete_multiple_tasks_success(state, action) {
+  const ids = action.ids;
+
+  const activeTasks = state.tasks.active.filter(task => {
+    if (ids.includes(task.id)) return false;
+    return true;
+  });
+
+  const finishedTasks = state.tasks.finished.filter(task => {
+    if (ids.includes(task.id)) return false;
+    return true;
+  });
+
+  return {
+    ...state,
+    tasks: {
+      ...state.tasks,
+      active: activeTasks,
+      finished: finishedTasks,
+      multipleDeletion: {
+        deleting: false,
+        deleted: true
+      }
+    }
+  };
+}
+
+function delete_multiple_tasks_fail(state, action) {
+  return {
+    ...state,
+    tasks: {
+      ...state.tasks,
+      multipleDeletion: {
+        deleting: false,
+        deleted: false
+      }
+    }
+  };
+}
+
+// Update active multiple users reducer helpers
+
+function update_active_multiple_tasks_start(state, action) {
+  return {
+    ...state
+  };
+}
+
+function update_active_multiple_tasks_success(state, action) {
+  return {
+    ...state
+  };
+}
+
+function update_active_multiple_tasks_fail(state, action) {
+  return {
+    ...state
   };
 }

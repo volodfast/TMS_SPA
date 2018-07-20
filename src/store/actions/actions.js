@@ -20,7 +20,13 @@ import {
   EDIT_USER_FAIL,
   CREATE_USER_START,
   CREATE_USER_SUCCESS,
-  CREATE_USER_FAIL
+  CREATE_USER_FAIL,
+  DELETE_MULTIPLE_TASKS_START,
+  DELETE_MULTIPLE_TASKS_SUCCESS,
+  DELETE_MULTIPLE_TASKS_FAIL,
+  UPDATE_ACTIVE_MULTIPLE_TASKS_START,
+  UPDATE_ACTIVE_MULTIPLE_TASKS_SUCCESS,
+  UPDATE_ACTIVE_MULTIPLE_TASKS_FAIL
 } from "./actionTypes";
 
 // TASKS load
@@ -182,5 +188,47 @@ export const createUserSuccess = user => {
 export const createUserFail = () => {
   return {
     type: CREATE_USER_FAIL
+  };
+};
+
+// Delete multiple tasks actions
+
+export const deleteMultipleTasksStart = () => {
+  return {
+    type: DELETE_MULTIPLE_TASKS_START
+  };
+};
+
+export const deleteMultipleTasksSuccess = task_ids => {
+  return {
+    type: DELETE_MULTIPLE_TASKS_SUCCESS,
+    ids: task_ids
+  };
+};
+
+export const deleteMultipleTasksFail = () => {
+  return {
+    type: DELETE_MULTIPLE_TASKS_FAIL
+  };
+};
+
+// Update active multiple tasks action
+
+export const updateActiveMultipleTasksStart = () => {
+  return {
+    type: UPDATE_ACTIVE_MULTIPLE_TASKS_START
+  };
+};
+
+export const updateActiveMultipleTasksSuccess = task_ids => {
+  return {
+    type: UPDATE_ACTIVE_MULTIPLE_TASKS_SUCCESS,
+    ids: task_ids
+  };
+};
+
+export const updateActiveMultipleTasksFail = () => {
+  return {
+    type: UPDATE_ACTIVE_MULTIPLE_TASKS_FAIL
   };
 };
