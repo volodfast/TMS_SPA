@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import ErrorList from "..//../../components/ErrorList/ErrorList";
+import ErrorList from "../../../../components/ErrorList/ErrorList";
 
 import "./LoginPage.css";
 

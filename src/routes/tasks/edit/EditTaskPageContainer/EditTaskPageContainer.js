@@ -6,8 +6,8 @@ import Axios from "axios";
 
 import EditTaskPage from "./EditTaskPage/EditTaskPage";
 
-import * as actions from "../../store/actions/actions";
-import nav from "../../history/nav";
+import * as actions from "../../../../store/actions/actions";
+import nav from "../../../../history/nav";
 
 class EditTaskPageContainer extends Component {
   constructor(props) {

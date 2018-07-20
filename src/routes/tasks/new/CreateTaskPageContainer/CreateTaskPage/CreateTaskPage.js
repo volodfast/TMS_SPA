@@ -5,11 +5,11 @@ import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
 import "moment/locale/en-gb";
 
-import ErrorList from "../../../components/ErrorList/ErrorList";
+import ErrorList from "../../../../../components/ErrorList/ErrorList";
 
-import "./EditTaskPage.css";
+import "./CreateTaskPage.css";
 
-const EditTaskPage = props => {
+const CreateTaskPage = props => {
   let errors = null;
   if (props.errors && props.errors.length !== 0) {
     errors = <ErrorList errors={props.errors} />;
@@ -17,7 +17,7 @@ const EditTaskPage = props => {
 
   return (
     <div className="create-task-container">
-      <h1>Edit Task</h1>
+      <h1>Create New Task</h1>
 
       {errors}
       <div className="row">
@@ -28,7 +28,6 @@ const EditTaskPage = props => {
             name="task_title"
             id="task_title"
             className="form-control"
-            defaultValue={props.title}
             onChange={props.handleTitleChange}
           />
           <label htmlFor="task_priority">Priority</label>
@@ -40,7 +39,7 @@ const EditTaskPage = props => {
             name="task_priority"
             id="task_priority"
             className="form-control"
-            defaultValue={props.priority}
+            defaultValue="0"
             onChange={props.handlePriorityChange}
           />
           <label htmlFor="task_due_date">Due date</label>
@@ -61,12 +60,11 @@ const EditTaskPage = props => {
             name="task_description"
             id="task_description"
             className="form-control"
-            defaultValue={props.description}
             onChange={props.handleDescriptionChange}
           />
           <input
             type="submit"
-            value="Edit task"
+            value="Create task"
             className="btn btn-primary"
             onClick={props.handleSubmit}
           />
@@ -76,4 +74,4 @@ const EditTaskPage = props => {
   );
 };
 
-export default EditTaskPage;
+export default CreateTaskPage;

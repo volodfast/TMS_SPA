@@ -6,14 +6,14 @@ import Axios from "axios";
 import Navigation from "./containers/Navigation/Navigation";
 import ProtectedRoute from "./containers/ProtectedRoute/ProtectedRoute";
 
-import MainPageContainer from "./containers/MainPageContainer/MainPageContainer";
-import LoginPageContainer from "./containers/LoginPageContainer/LoginPageContainer";
-import ShowTaskPageContainer from "./containers/ShowTaskPageContainer/ShowTaskPageContainer";
-import CreateTaskPageContainer from "./containers/CreateTaskPageContainer/CreateTaskPageContainer";
-import EditTaskPageContainer from "./containers/EditTaskPageContainer/EditTaskPageContainer";
-import EditUserPageContainer from "./containers/EditUserPageContainer/EditUserPageContainer";
-import CreateUserPageContainer from "./containers/CreateUserPageContainer/CreateUserPageContainer";
-import NotFoundPage from "./components/NotFoundPage/NotFoundPage";
+import MainPageContainer from "./routes/root/MainPageContainer/MainPageContainer";
+import LoginPageContainer from "./routes/login/LoginPageContainer/LoginPageContainer";
+import ShowTaskPageContainer from "./routes/tasks/show/ShowTaskPageContainer/ShowTaskPageContainer";
+import CreateTaskPageContainer from "./routes/tasks/new/CreateTaskPageContainer/CreateTaskPageContainer";
+import EditTaskPageContainer from "./routes/tasks/edit/EditTaskPageContainer/EditTaskPageContainer";
+import EditUserPageContainer from "./routes/user/edit/EditUserPageContainer/EditUserPageContainer";
+import CreateUserPageContainer from "./routes/signup/CreateUserPageContainer/CreateUserPageContainer";
+import NotFoundPage from "./routes/404/NotFoundPage/NotFoundPage";
 
 import * as actions from "./store/actions/actions";
 

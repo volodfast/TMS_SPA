@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { formatDate } from "../../../helpers/helpers";
+import { formatDate } from "../../../../../helpers/helpers";
 
 import "./ShowTaskPage.css";
 

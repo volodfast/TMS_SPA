@@ -1,6 +1,6 @@
 import React from "react";
 
-import ErrorList from "../../../components/ErrorList/ErrorList";
+import ErrorList from "../../../../components/ErrorList/ErrorList";
 
 import "./CreateUserPage.css";
 

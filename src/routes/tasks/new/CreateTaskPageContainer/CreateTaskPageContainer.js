@@ -6,8 +6,8 @@ import Axios from "axios";
 
 import CreateTaskPage from "./CreateTaskPage/CreateTaskPage";
 
-import * as actions from "../../store/actions/actions";
-import nav from "../../history/nav";
+import * as actions from "../../../../store/actions/actions";
+import nav from "../../../../history/nav";
 
 class CreateTaskPageContainer extends Component {
   constructor(props) {

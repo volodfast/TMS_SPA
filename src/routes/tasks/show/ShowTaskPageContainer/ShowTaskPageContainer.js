@@ -4,8 +4,8 @@ import Axios from "axios";
 
 import ShowTaskPage from "./ShowTaskPage/ShowTaskPage";
 
-import * as actions from "../../store/actions/actions";
-import nav from "../../history/nav";
+import * as actions from "../../../../store/actions/actions";
+import nav from "../../../../history/nav";
 
 class ShowTaskPageContainer extends Component {
   constructor(props) {

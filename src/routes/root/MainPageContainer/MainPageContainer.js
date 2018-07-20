@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import UserInfo from "../../components/UserInfo/UserInfo";
-import TaskTablesContainer from "../TaskTablesContainer/TaskTablesContainer";
+import UserInfo from "../../../components/UserInfo/UserInfo";
+import TaskTablesContainer from "../../../containers/TaskTablesContainer/TaskTablesContainer";
 
 import "./MainPageContainer.css";
 

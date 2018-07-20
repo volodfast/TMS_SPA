@@ -2,18 +2,19 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Axios from "axios";
 
-import EditUserPage from "./EditUserPage/EditUserPage";
+import CreateUserPage from "./CreateUserPage/CreateUserPage";
 
-import * as actions from "../../store/actions/actions";
-import nav from "../../history/nav";
+import * as actions from "../../../store/actions/actions";
+import nav from "../../../history/nav";
 
-class EditUserPageContainer extends Component {
+class CreateUserPageContainer extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
-      first_name: props.userFirstName,
-      last_name: props.userLastName,
-      email: props.userEmail,
+      first_name: "",
+      last_name: "",
+      email: "",
       password: "",
       password_confirmation: "",
       errors: []
@@ -61,37 +62,45 @@ class EditUserPageContainer extends Component {
 
   handleSubmit(e) {
     e.preventDefault();
+
     if (!this.validateBeforeSend()) {
-      console.log("Invalid!");
       return;
     }
 
-    let user = {
+    const user = {
       first_name: this.state.first_name.trim(),
       last_name: this.state.last_name.trim(),
-      email: this.state.email.trim()
+      email: this.state.email.trim(),
+      password: this.state.password.trim(),
+      password_confirmation: this.state.password_confirmation.trim()
     };
+    const link = `/api/users`;
 
-    if (
-      !(
-        this.state.password.length === 0 &&
-        this.state.password_confirmation.length === 0
-      )
-    ) {
-      user.password = this.state.password;
-      user.password_confirmation = this.state.password_confirmation;
-    }
-
-    const link = `/api/users/${this.props.userId}`;
-    this.props.editUserStart();
-    Axios.put(link, { user: user })
+    this.props.createUserStart();
+    Axios.post(link, {
+      user: user
+    })
       .then(res => {
-        this.props.editUserSuccess(res.data);
-        nav("/");
+        this.props.createUserSuccess(res.data);
+        nav("/login");
       })
       .catch(err => {
+        if (err.response.status === 422) {
+          let errorsObj = err.response.data;
+          let errors = [];
+          for (let title in errorsObj) {
+            for (let i = 0; i < errorsObj[title].length; i++) {
+              const errMsg = `${title} ${errorsObj[title][i]}`;
+              errors.push(errMsg);
+            }
+          }
+          this.setState({
+            errors: errors
+          });
+        }
+
         console.dir(err);
-        this.props.editUserFail();
+        this.props.createUserFail();
       });
   }
 
@@ -116,13 +125,12 @@ class EditUserPageContainer extends Component {
     if (!regEx.test(email)) {
       errors.push("Email is not valid!");
     }
-    if (!(password.length === 0 && passwordConfirmation.length === 0)) {
-      if (password !== passwordConfirmation) {
-        errors.push("Password and password confirmation should be equal!");
-      }
-      if (password.length < 6) {
-        errors.push("Password can't be less than 6 chars!");
-      }
+
+    if (password !== passwordConfirmation) {
+      errors.push("Password and password confirmation should be equal!");
+    }
+    if (password.length < 6) {
+      errors.push("Password can't be less than 6 chars!");
     }
 
     if (errors.length !== 0) {
@@ -142,8 +150,9 @@ class EditUserPageContainer extends Component {
       password: this.state.password,
       password_confirmation: this.state.password_confirmation
     };
+
     return (
-      <EditUserPage
+      <CreateUserPage
         user={user}
         errors={this.state.errors}
         handleFirstNameChange={this.handleFirstNameChange}
@@ -157,29 +166,21 @@ class EditUserPageContainer extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    userId: state.user.id,
-    userFirstName: state.user.first_name,
-    userLastName: state.user.last_name,
-    userEmail: state.user.email
-  };
-}
 function mapDispatchToProps(dispatch) {
   return {
-    editUserStart: () => {
-      dispatch(actions.editUserStart());
+    createUserStart: () => {
+      dispatch(actions.createUserStart());
     },
-    editUserSuccess: user => {
-      dispatch(actions.editUserSuccess(user));
+    createUserSuccess: user => {
+      dispatch(actions.createUserSuccess(user));
     },
-    editUserFail: () => {
-      dispatch(actions.editTaskFail());
+    createUserFail: () => {
+      dispatch(actions.createUserFail());
     }
   };
 }
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
-)(EditUserPageContainer);
+)(CreateUserPageContainer);
