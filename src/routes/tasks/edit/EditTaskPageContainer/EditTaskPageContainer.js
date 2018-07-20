@@ -13,7 +13,16 @@ class EditTaskPageContainer extends Component {
   constructor(props) {
     super(props);
 
-    const task = this.findTaskById(+this.props.match.params.task_id);
+    let task = this.findTaskById(+this.props.match.params.task_id);
+
+    if (!task) {
+      task = {
+        title: "",
+        priority: 0,
+        due_date: moment(),
+        description: ""
+      };
+    }
 
     this.state = {
       title: task.title,

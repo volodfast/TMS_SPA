@@ -7,6 +7,8 @@ import "moment/locale/en-gb";
 
 import ErrorList from "../../../../../components/ErrorList/ErrorList";
 
+import history from "../../../../../history/history";
+
 import "./EditTaskPage.css";
 
 const EditTaskPage = props => {
@@ -17,6 +19,9 @@ const EditTaskPage = props => {
 
   return (
     <div className="create-task-container">
+      <button onClick={history.goBack} className="btn btn-primary back-button">
+        Back
+      </button>
       <h1>Edit Task</h1>
 
       {errors}
@@ -67,7 +72,7 @@ const EditTaskPage = props => {
           <input
             type="submit"
             value="Edit task"
-            className="btn btn-primary"
+            className="btn btn-success"
             onClick={props.handleSubmit}
           />
         </form>

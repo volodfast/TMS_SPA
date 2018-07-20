@@ -1,0 +1,6 @@
+.create-task-container .back-button {
+  /* float: left; */
+  left: 20vw;
+  position: absolute;
+  width: 150px;
+}
