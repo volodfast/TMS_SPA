@@ -14,3 +14,9 @@
 .edit-user-container .btn {
   width: 100%;
 }
+.edit-user-container .back-button {
+  left: 20vw;
+  position: absolute;
+  width: 150px;
+
+}

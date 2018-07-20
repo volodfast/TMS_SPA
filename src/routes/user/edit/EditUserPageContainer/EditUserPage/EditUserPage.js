@@ -2,6 +2,8 @@ import React from "react";
 
 import ErrorList from "../../../../../components/ErrorList/ErrorList";
 
+import history from "../../../../../history/history";
+
 import "./EditUserPage.css";
 
 const EditUserPage = props => {
@@ -12,6 +14,9 @@ const EditUserPage = props => {
 
   return (
     <div className="edit-user-container">
+      <button onClick={history.goBack} className="btn btn-primary back-button">
+        Back
+      </button>
       <h1>Update your profile</h1>
 
       {errors}
