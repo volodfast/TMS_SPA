@@ -18,7 +18,7 @@ const EditTaskPage = props => {
   }
 
   return (
-    <div className="create-task-container">
+    <div className="edit-task-container">
       <button onClick={history.goBack} className="btn btn-primary back-button">
         Back
       </button>

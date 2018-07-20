@@ -1,4 +1,25 @@
-.create-task-container .back-button {
+.edit-task-container {
+  text-align: center;
+}
+
+.edit-task-container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.edit-task-container input {
+  margin-bottom: 15px;
+}
+
+.edit-task-container textarea {
+  margin-bottom: 15px;
+}
+
+.edit-task-container .btn {
+  width: 100%;
+}
+
+.edit-task-container .back-button {
   left: 20vw;
   position: absolute;
   width: 150px;
