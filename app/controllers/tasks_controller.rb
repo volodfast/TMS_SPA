@@ -1,6 +1,6 @@
 class TasksController < ApplicationController
   before_action :authenticate_user
-  before_action :current_user?
+  before_action :is_current_user
   before_action :set_task, only: [:show, :update, :destroy]
 
   # GET /tasks
@@ -42,9 +42,24 @@ class TasksController < ApplicationController
     @task.destroy
   end
 
+  def delete_multiple
+    ids = params[:ids]
+    current_user.tasks.where(id: ids).destroy_all
+  end
+
+  def change_active_multiple
+    ids = params[:ids]
+    active = params[:active]
+    if current_user.tasks.where(id: ids).update_all(active: active)
+      render :json => { :ids => ids, :active => active }
+    else
+      render json: current_user.tasks.errors, status: :unprocessable_entity
+    end
+  end
+
   private
     # See if this is current user
-    def current_user?
+    def is_current_user
       if current_user.id.to_s != params[:user_id]
         render json: {status: "Can't give you someone else info"} , status: 401
       end
