@@ -67,6 +67,10 @@ const initialState = {
     multipleDeletion: {
       deleting: false,
       deleted: true
+    },
+    multipleUpdating: {
+      updating: false,
+      updated: true
     }
   },
   errors: []
@@ -537,18 +541,76 @@ function delete_multiple_tasks_fail(state, action) {
 
 function update_active_multiple_tasks_start(state, action) {
   return {
-    ...state
+    ...state,
+    tasks: {
+      ...state.tasks,
+      multipleUpdating: {
+        updating: true,
+        updated: false
+      }
+    }
   };
 }
 
 function update_active_multiple_tasks_success(state, action) {
+  const isActive = action.isActive;
+  const ids = action.ids;
+
+  let tasks;
+  if (isActive) {
+    tasks = state.tasks.finished.filter(task => {
+      if (ids.includes(task.id)) return true;
+      return false;
+    });
+  } else {
+    tasks = state.tasks.active.filter(task => {
+      if (ids.includes(task.id)) return true;
+      return false;
+    });
+  }
+
+  let activeTasks;
+  let finishedTasks;
+
+  if (isActive) {
+    // if tasks now active - filter finished tasks
+    finishedTasks = state.tasks.finished.filter(task => {
+      if (ids.includes(task.id)) return false;
+      return true;
+    });
+
+    activeTasks = state.tasks.active.concat(tasks);
+  } else {
+    activeTasks = state.tasks.active.filter(task => {
+      if (ids.includes(task.id)) return false;
+      return true;
+    });
+    finishedTasks = state.tasks.finished.concat(tasks);
+  }
+
   return {
-    ...state
+    ...state,
+    tasks: {
+      ...state.tasks,
+      active: activeTasks,
+      finished: finishedTasks,
+      multipleUpdating: {
+        updating: false,
+        updated: true
+      }
+    }
   };
 }
 
 function update_active_multiple_tasks_fail(state, action) {
   return {
-    ...state
+    ...state,
+    tasks: {
+      ...state.tasks,
+      multipleUpdating: {
+        updating: false,
+        updated: false
+      }
+    }
   };
 }

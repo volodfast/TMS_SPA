@@ -220,10 +220,11 @@ export const updateActiveMultipleTasksStart = () => {
   };
 };
 
-export const updateActiveMultipleTasksSuccess = task_ids => {
+export const updateActiveMultipleTasksSuccess = (task_ids, isActive) => {
   return {
     type: UPDATE_ACTIVE_MULTIPLE_TASKS_SUCCESS,
-    ids: task_ids
+    ids: task_ids,
+    isActive: isActive
   };
 };
 

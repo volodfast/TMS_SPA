@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Route, withRouter, Switch } from "react-router-dom";
 import { connect } from "react-redux";
+import Axios from "axios";
 
 import Navigation from "./containers/Navigation/Navigation";
 import ProtectedRoute from "./containers/ProtectedRoute/ProtectedRoute";
@@ -17,7 +18,6 @@ import NotFoundPage from "./components/NotFoundPage/NotFoundPage";
 import * as actions from "./store/actions/actions";
 
 import "./App.css";
-import Axios from "axios";
 
 class App extends Component {
   constructor(props) {
