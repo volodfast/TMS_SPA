@@ -21,8 +21,6 @@ class FinishedTaskTable extends Component {
     this.props.updateActiveMultipleTasksStart();
     Axios.put(link, { ids: ids, active: active })
       .then(res => {
-        console.log("Success");
-        console.dir(res);
         this.props.updateActiveMultipleTasksSuccess(res.data.ids, active);
       })
       .catch(err => {
