@@ -43,12 +43,10 @@ class LoginPageContainer extends Component {
 
         this.props.authSuccess(user, token);
 
+        Axios.defaults.headers["Authorization"] = "Bearer " + token;
+
         this.props.loadAllTasksStart();
-        return Axios.get(`/api/users/${user.id}/tasks`, {
-          headers: {
-            Authorization: "Bearer " + token
-          }
-        });
+        return Axios.get(`/api/users/${user.id}/tasks`);
       })
       .then(res => {
         const tasks = res.data;

@@ -66,25 +66,16 @@ class CreateTaskPageContainer extends Component {
     if (!this.validateBeforeSend()) {
       return;
     }
-    const token = localStorage.getItem("tms-jwt");
     const link = `/api/users/${this.props.userId}/tasks`;
     this.props.createTaskStart();
-    Axios.post(
-      link,
-      {
-        task: {
-          title: this.state.title,
-          priority: this.state.priority,
-          due_date: new Date(this.state.due_date),
-          description: this.state.description
-        }
-      },
-      {
-        headers: {
-          Authorization: "Bearer " + token
-        }
+    Axios.post(link, {
+      task: {
+        title: this.state.title,
+        priority: this.state.priority,
+        due_date: new Date(this.state.due_date),
+        description: this.state.description
       }
-    )
+    })
       .then(res => {
         this.props.createTaskSuccess(res.data);
         nav("/");

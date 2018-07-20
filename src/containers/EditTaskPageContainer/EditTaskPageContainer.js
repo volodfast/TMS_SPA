@@ -66,24 +66,15 @@ class EditTaskPageContainer extends Component {
     const taskId = this.props.match.params.task_id;
 
     const link = `/api/users/${userId}/tasks/${taskId}`;
-    const token = localStorage.getItem("tms-jwt");
     this.props.editTaskStart();
-    Axios.put(
-      link,
-      {
-        task: {
-          title: this.state.title,
-          priority: this.state.priority,
-          due_date: new Date(this.state.due_date),
-          description: this.state.description
-        }
-      },
-      {
-        headers: {
-          Authorization: "Bearer " + token
-        }
+    Axios.put(link, {
+      task: {
+        title: this.state.title,
+        priority: this.state.priority,
+        due_date: new Date(this.state.due_date),
+        description: this.state.description
       }
-    )
+    })
       .then(res => {
         this.props.editTaskSuccess(res.data);
         nav("/");

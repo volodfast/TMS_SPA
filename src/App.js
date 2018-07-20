@@ -43,13 +43,11 @@ class App extends Component {
           errMsg = "Can't load user tasks!";
           this.props.authSuccess(res.data, token);
 
+          Axios.defaults.headers["Authorization"] = "Bearer " + token;
+
           this.props.loadAllTasksStart();
 
-          return Axios.get(`${baseUrl}/tasks`, {
-            headers: {
-              Authorization: "Bearer " + token
-            }
-          });
+          return Axios.get(`${baseUrl}/tasks`);
         })
         .then(res => {
           this.props.loadAllTasksSuccess(res.data);

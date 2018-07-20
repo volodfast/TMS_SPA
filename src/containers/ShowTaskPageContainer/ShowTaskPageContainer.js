@@ -33,12 +33,8 @@ class ShowTaskPageContainer extends Component {
     const userId = this.props.userId;
     const taskId = +this.props.match.params.task_id;
     const link = `/api/users/${userId}/tasks/${taskId}`;
-    const token = localStorage.getItem("tms-jwt");
     this.props.deleteTaskStart();
     Axios.delete(link, {
-      headers: {
-        Authorization: "Bearer " + token
-      },
       params: {
         id: taskId
       }

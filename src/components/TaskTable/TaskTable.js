@@ -90,13 +90,9 @@ class TaskTable extends Component {
     if (taskIds.length === 0) return;
 
     const link = `/api/users/${userId}/tasks/delete_multiple`;
-    const token = localStorage.getItem("tms-jwt");
 
     this.props.deleteMultipleTasksStart();
     Axios.delete(link, {
-      headers: {
-        Authorization: "Bearer " + token
-      },
       params: {
         ids: taskIds
       }

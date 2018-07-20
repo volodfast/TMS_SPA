@@ -15,15 +15,11 @@ const Task = props => {
     const userId = props.userId;
     const taskId = props.id;
     const link = `/api/users/${userId}/tasks/${taskId}`;
-    const token = localStorage.getItem("tms-jwt");
 
     props.deleteTaskStart();
     Axios.delete(link, {
       params: {
         id: taskId
-      },
-      headers: {
-        Authorization: "Bearer " + token
       }
     })
       .then(res => {

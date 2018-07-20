@@ -83,13 +83,8 @@ class EditUserPageContainer extends Component {
     }
 
     const link = `/api/users/${this.props.userId}`;
-    const token = localStorage.getItem("tms-jwt");
     this.props.editUserStart();
-    Axios.put(
-      link,
-      { user: user },
-      { headers: { Authorization: "Bearer " + token } }
-    )
+    Axios.put(link, { user: user })
       .then(res => {
         this.props.editUserSuccess(res.data);
         nav("/");
