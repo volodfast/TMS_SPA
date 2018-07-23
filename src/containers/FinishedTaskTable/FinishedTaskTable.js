@@ -11,6 +11,7 @@ class FinishedTaskTable extends Component {
     super(props);
 
     this.uncompleteSelected = this.uncompleteSelected.bind(this);
+    this.getSelectedFiltered = this.getSelectedFiltered.bind(this);
   }
 
   uncompleteSelected(ids) {
@@ -29,6 +30,16 @@ class FinishedTaskTable extends Component {
       });
   }
 
+  getSelectedFiltered() {
+    const taskIds = this.props.tasks.map(task => task.id);
+    const selectedIds = this.props.selectedFinished;
+
+    return selectedIds.filter(sel_id => {
+      if (taskIds.includes(sel_id)) return true;
+      return false;
+    });
+  }
+
   render() {
     const handleSelected = {
       text: "Uncomplete",
@@ -36,9 +47,11 @@ class FinishedTaskTable extends Component {
       handler: this.uncompleteSelected
     };
 
+    const selected = this.getSelectedFiltered();
+
     return (
       <TaskTableContainer
-        selectedIds={this.props.selectedFinished}
+        selectedIds={selected}
         handleSelectedOnUnmount={this.props.addSelectedFinishedTaskIdsToCache}
         tasks={this.props.tasks}
         text={{

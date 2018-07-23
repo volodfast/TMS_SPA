@@ -12,7 +12,7 @@ class TaskTableContainer extends Component {
     super(props);
 
     this.state = {
-      selectedIds: []
+      selectedIds: this.props.selectedIds || []
     };
 
     this.onToggleSelect = this.onToggleSelect.bind(this);
@@ -103,6 +103,10 @@ class TaskTableContainer extends Component {
         console.dir(err);
         this.props.deleteTaskFail();
       });
+  }
+
+  componentWillUnmount() {
+    this.props.handleSelectedOnUnmount(this.state.selectedIds);
   }
 
   render() {

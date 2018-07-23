@@ -11,6 +11,7 @@ class ActiveTaskTable extends Component {
     super(props);
 
     this.completeSelected = this.completeSelected.bind(this);
+    this.getSelectedFiltered = this.getSelectedFiltered.bind(this);
   }
 
   completeSelected(ids) {
@@ -29,16 +30,28 @@ class ActiveTaskTable extends Component {
       });
   }
 
+  getSelectedFiltered() {
+    const taskIds = this.props.tasks.map(task => task.id);
+    const selectedIds = this.props.selectedActive;
+
+    return selectedIds.filter(sel_id => {
+      if (taskIds.includes(sel_id)) return true;
+      return false;
+    });
+  }
+
   render() {
     const handleSelected = {
       text: "Complete",
       classes: "btn btn-success",
       handler: this.completeSelected
     };
+
+    const selected = this.getSelectedFiltered();
+
     return (
       <TaskTableContainer
-        active
-        selectedIds={this.props.selectedActive}
+        selectedIds={selected}
         handleSelectedOnUnmount={this.props.addSelectedActiveTaskIdsToCache}
         tasks={this.props.tasks}
         text={{
