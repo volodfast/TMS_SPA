@@ -23,11 +23,14 @@ export default props => {
             type="text"
             value={props.email}
             onChange={props.handleEmailChange}
+            tabIndex="1"
           />
           <label htmlFor="password">
             Password{" "}
             <span className="forgot-password">
-              <Link to="/">(forgot password?)</Link>
+              <Link to="/" tabIndex="4">
+                (forgot password?)
+              </Link>
             </span>
           </label>
           <input
@@ -36,16 +39,21 @@ export default props => {
             type="password"
             value={props.password}
             onChange={props.handlePasswordChange}
+            tabIndex="2"
           />
           <input
             className="btn btn-primary"
             type="submit"
             onClick={props.authenticate}
             defaultValue="Log In"
+            tabIndex="3"
           />
         </form>
         <p>
-          New user? <Link to="/signup">Sing up now!</Link>
+          New user?{" "}
+          <Link to="/signup" tabIndex="5">
+            Sing up now!
+          </Link>
         </p>
       </div>
     </div>
