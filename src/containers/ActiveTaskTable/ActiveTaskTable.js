@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Axios from "axios";
 
-import TaskTable from "../TaskTable/TaskTable";
+import TaskTableContainer from "../TaskTableContainer/TaskTableContainer";
 
 import * as actions from "../../store/actions/actions";
 
@@ -30,8 +30,13 @@ class ActiveTaskTable extends Component {
   }
 
   render() {
+    const handleSelected = {
+      text: "Complete",
+      classes: "btn btn-success",
+      handler: this.completeSelected
+    };
     return (
-      <TaskTable
+      <TaskTableContainer
         active
         selectedIds={this.props.selectedActive}
         handleSelectedOnUnmount={this.props.addSelectedActiveTaskIdsToCache}
@@ -40,7 +45,7 @@ class ActiveTaskTable extends Component {
           default: "There are no active tasks! Create new one!",
           active: "Number of active tasks:"
         }}
-        handleSelected={this.completeSelected}
+        handleSelected={handleSelected}
       />
     );
   }

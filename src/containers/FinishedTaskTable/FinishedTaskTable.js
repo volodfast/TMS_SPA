@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Axios from "axios";
 
-import TaskTable from "../TaskTable/TaskTable";
+import TaskTableContainer from "../TaskTableContainer/TaskTableContainer";
 
 import * as actions from "../../store/actions/actions";
 
@@ -30,8 +30,14 @@ class FinishedTaskTable extends Component {
   }
 
   render() {
+    const handleSelected = {
+      text: "Uncomplete",
+      classes: "btn btn-warning",
+      handler: this.uncompleteSelected
+    };
+
     return (
-      <TaskTable
+      <TaskTableContainer
         selectedIds={this.props.selectedFinished}
         handleSelectedOnUnmount={this.props.addSelectedFinishedTaskIdsToCache}
         tasks={this.props.tasks}
@@ -39,7 +45,7 @@ class FinishedTaskTable extends Component {
           default: "There are no finished tasks!",
           active: "Number of finished tasks:"
         }}
-        handleSelected={this.uncompleteSelected}
+        handleSelected={handleSelected}
       />
     );
   }

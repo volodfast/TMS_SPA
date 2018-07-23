@@ -1,0 +1,16 @@
+.task-table-controls {
+  text-align: left;
+}
+
+.task-table-controls button {
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+.task-table-controls .select_buttons {
+  margin-bottom: 10px;
+}
+.task-table-controls button:focus,
+.task-table-controls button:active:hover {
+  outline: none;
+}
