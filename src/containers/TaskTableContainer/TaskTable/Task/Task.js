@@ -6,7 +6,7 @@ import { formatTitle, formatDate } from "../../../../helpers/helpers";
 import "./Task.css";
 
 const Task = props => {
-  const title = formatTitle(props.title, 15);
+  const title = formatTitle(props.title, 25);
   const due_date = formatDate(props.due_date);
 
   return (
