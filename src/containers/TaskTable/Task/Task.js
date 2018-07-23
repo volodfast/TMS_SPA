@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Axios from "axios";
 
-import { formatDate, formatTitle } from "../../../../helpers/helpers";
+import { formatDate, formatTitle } from "../../../helpers/helpers";
 
-import * as actions from "../../../../store/actions/actions";
+import * as actions from "../../../store/actions/actions";
 import "./Task.css";
 
 const Task = props => {

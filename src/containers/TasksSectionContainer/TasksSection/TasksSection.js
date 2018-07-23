@@ -1,9 +1,9 @@
 import React from "react";
 
-import ActiveTaskTable from "./ActiveTaskTable/ActiveTaskTable";
-import FinishedTaskTable from "./FinishedTaskTable/FinishedTaskTable";
+import ActiveTaskTable from "../../ActiveTaskTable/ActiveTaskTable";
+import FinishedTaskTable from "../../FinishedTaskTable/FinishedTaskTable";
 
-import "./TaskTables.css";
+import "./TasksSection.css";
 
 const TaskTables = props => {
   let activeTabStyle = "";

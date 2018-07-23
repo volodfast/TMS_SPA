@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import UserInfo from "../../../components/UserInfo/UserInfo";
-import TaskTablesContainer from "../../../containers/TaskTablesContainer/TaskTablesContainer";
+import TaskSectionContainer from "../../../containers/TasksSectionContainer/TasksSectionContainer";
 
 import "./MainPageContainer.css";
 
@@ -18,7 +18,7 @@ class MainPageContainer extends Component {
           }}
           date={new Date().toDateString()}
         />
-        <TaskTablesContainer />
+        <TaskSectionContainer />
       </div>
     );
   }

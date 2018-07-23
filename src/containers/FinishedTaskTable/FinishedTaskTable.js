@@ -4,20 +4,20 @@ import Axios from "axios";
 
 import TaskTable from "../TaskTable/TaskTable";
 
-import * as actions from "../../../store/actions/actions";
+import * as actions from "../../store/actions/actions";
 
-class ActiveTaskTable extends Component {
+class FinishedTaskTable extends Component {
   constructor(props) {
     super(props);
 
-    this.completeSelected = this.completeSelected.bind(this);
+    this.uncompleteSelected = this.uncompleteSelected.bind(this);
   }
 
-  completeSelected(ids) {
+  uncompleteSelected(ids) {
     if (ids.length === 0) return;
 
     const link = `/api/users/${this.props.userId}/tasks/change_active_multiple`;
-    const active = false;
+    const active = true;
     this.props.updateActiveMultipleTasksStart();
     Axios.put(link, { ids: ids, active: active })
       .then(res => {
@@ -32,15 +32,14 @@ class ActiveTaskTable extends Component {
   render() {
     return (
       <TaskTable
-        active
-        selectedIds={this.props.selectedActive}
-        handleSelectedOnUnmount={this.props.addSelectedActiveTaskIdsToCache}
+        selectedIds={this.props.selectedFinished}
+        handleSelectedOnUnmount={this.props.addSelectedFinishedTaskIdsToCache}
         tasks={this.props.tasks}
         text={{
-          default: "There are no active tasks! Create new one!",
-          active: "Number of active tasks:"
+          default: "There are no finished tasks!",
+          active: "Number of finished tasks:"
         }}
-        handleSelected={this.completeSelected}
+        handleSelected={this.uncompleteSelected}
       />
     );
   }
@@ -49,7 +48,7 @@ class ActiveTaskTable extends Component {
 function mapStateToProps(state) {
   return {
     userId: state.user.id,
-    selectedActive: state.cache.selectedIds.active
+    selectedFinished: state.cache.selectedIds.finished
   };
 }
 
@@ -64,8 +63,8 @@ function mapDispatchToProps(dispatch) {
     updateActiveMultipleTasksFail: () => {
       dispatch(actions.updateActiveMultipleTasksFail());
     },
-    addSelectedActiveTaskIdsToCache: ids => {
-      dispatch(actions.addSelectedActiveTaskIdsToCache(ids));
+    addSelectedFinishedTaskIdsToCache: ids => {
+      dispatch(actions.addSelectedFinishedTaskIdsToCache(ids));
     }
   };
 }
@@ -73,4 +72,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ActiveTaskTable);
+)(FinishedTaskTable);

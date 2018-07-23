@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import TaskTables from "../TaskTables/TaskTables";
+import TasksSection from "./TasksSection/TasksSection";
 
 import * as actions from "../../store/actions/actions";
 
-class TaskTablesContainer extends Component {
+class TaskSectionContainer extends Component {
   constructor(props) {
     super(props);
 
@@ -23,7 +23,7 @@ class TaskTablesContainer extends Component {
 
   render() {
     return (
-      <TaskTables
+      <TasksSection
         handleClickActive={this.handleClickActive}
         handleClickFinished={this.handleClickFinished}
         activeTasks={this.props.activeTasks}
@@ -53,4 +53,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(TaskTablesContainer);
+)(TaskSectionContainer);
