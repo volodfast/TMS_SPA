@@ -30,23 +30,18 @@ class ActiveTaskTable extends Component {
   }
 
   render() {
-    const classStyle = this.props.isActive
-      ? "tab-pane fade active in"
-      : "tab-pane fade";
     return (
-      <div className={classStyle} id={this.props.id}>
-        <TaskTable
-          active
-          selectedIds={this.props.selectedActive}
-          handleSelectedOnUnmount={this.props.addSelectedActiveTaskIdsToCache}
-          tasks={this.props.tasks}
-          text={{
-            default: "There are no active tasks! Create new one!",
-            active: "Number of active tasks:"
-          }}
-          handleSelected={this.completeSelected}
-        />
-      </div>
+      <TaskTable
+        active
+        selectedIds={this.props.selectedActive}
+        handleSelectedOnUnmount={this.props.addSelectedActiveTaskIdsToCache}
+        tasks={this.props.tasks}
+        text={{
+          default: "There are no active tasks! Create new one!",
+          active: "Number of active tasks:"
+        }}
+        handleSelected={this.completeSelected}
+      />
     );
   }
 }

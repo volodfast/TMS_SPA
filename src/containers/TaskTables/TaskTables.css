@@ -1,26 +1,3 @@
-.task_tabs>li.active>a, 
-.task_tabs>li.active>a:focus, 
-.task_tabs>li.active>a:hover {
-  color: #555;
-  cursor: default;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-bottom-color: transparent;
-}
-
-.task_tabs>li>a {
-  margin-right: 2px;
-  line-height: 1.42857143;
-  border: 1px solid transparent;
-  border-radius: 4px 4px 0 0;
-}
-
-.tab>li>a {
-  position: relative;
-  display: block;
-  padding: 10px 15px;
-}
-
-a:active, a:hover {
-  outline: 0;
+.task-tables li>a {
+  cursor: pointer;
 }

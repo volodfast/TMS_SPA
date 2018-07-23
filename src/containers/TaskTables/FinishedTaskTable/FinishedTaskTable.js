@@ -30,22 +30,17 @@ class FinishedTaskTable extends Component {
   }
 
   render() {
-    const classStyle = this.props.isActive
-      ? "tab-pane fade active in"
-      : "tab-pane fade";
     return (
-      <div className={classStyle} id={this.props.id}>
-        <TaskTable
-          selectedIds={this.props.selectedFinished}
-          handleSelectedOnUnmount={this.props.addSelectedFinishedTaskIdsToCache}
-          tasks={this.props.tasks}
-          text={{
-            default: "There are no finished tasks!",
-            active: "Number of finished tasks:"
-          }}
-          handleSelected={this.uncompleteSelected}
-        />
-      </div>
+      <TaskTable
+        selectedIds={this.props.selectedFinished}
+        handleSelectedOnUnmount={this.props.addSelectedFinishedTaskIdsToCache}
+        tasks={this.props.tasks}
+        text={{
+          default: "There are no finished tasks!",
+          active: "Number of finished tasks:"
+        }}
+        handleSelected={this.uncompleteSelected}
+      />
     );
   }
 }
