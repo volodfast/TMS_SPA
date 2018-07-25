@@ -199,9 +199,10 @@ export const createUserFail = () => {
 
 // Delete multiple tasks actions
 
-export const deleteMultipleTasksStart = () => {
+export const deleteMultipleTasksStart = ids => {
   return {
-    type: DELETE_MULTIPLE_TASKS_START
+    type: DELETE_MULTIPLE_TASKS_START,
+    taskIds: ids
   };
 };
 

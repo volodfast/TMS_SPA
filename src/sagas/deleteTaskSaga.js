@@ -1,5 +1,4 @@
 import { takeEvery, select, put, call } from "redux-saga/es/effects";
-
 import Axios from "axios";
 
 import { DELETE_TASK_START } from "../store/actions/actionTypes";

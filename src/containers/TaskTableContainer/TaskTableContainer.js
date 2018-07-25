@@ -64,27 +64,11 @@ class TaskTableContainer extends Component {
 
   deleteSelected(e) {
     e.preventDefault();
-    const userId = this.props.userId;
     const taskIds = this.state.selectedIds.concat();
 
     if (taskIds.length === 0) return;
 
-    const link = `/api/users/${userId}/tasks/delete_multiple`;
-
-    this.props.deleteMultipleTasksStart();
-    Axios.delete(link, {
-      params: {
-        ids: taskIds
-      }
-    })
-      .then(res => {
-        this.props.deleteMultipleTasksSuccess(taskIds);
-      })
-      .catch(err => {
-        console.log("FAIL DELETE");
-        console.dir(err);
-        this.props.deleteMultipleTasksFail();
-      });
+    this.props.deleteMultipleTasksStart(taskIds);
   }
 
   deleteTask(id) {
@@ -238,22 +222,10 @@ class TaskTableContainer extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    userId: state.user.id
-  };
-}
-
 function mapDispatchToProps(dispatch) {
   return {
-    deleteMultipleTasksStart: () => {
-      dispatch(actions.deleteMultipleTasksStart());
-    },
-    deleteMultipleTasksSuccess: ids => {
-      dispatch(actions.deleteMultipleTasksSuccess(ids));
-    },
-    deleteMultipleTasksFail: () => {
-      dispatch(actions.deleteMultipleTasksFail());
+    deleteMultipleTasksStart: ids => {
+      dispatch(actions.deleteMultipleTasksStart(ids));
     },
     deleteTaskStart: id => {
       dispatch(actions.deleteTaskStart(id));
@@ -262,6 +234,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(TaskTableContainer);
