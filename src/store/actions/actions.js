@@ -90,9 +90,10 @@ export const logout = () => {
 
 // Create_task actions
 
-export const createTaskStart = () => {
+export const createTaskStart = task => {
   return {
-    type: CREATE_TASK_START
+    type: CREATE_TASK_START,
+    task: task
   };
 };
 

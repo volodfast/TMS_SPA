@@ -2,12 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import moment from "moment";
-import Axios from "axios";
 
 import CreateTaskPage from "./CreateTaskPage/CreateTaskPage";
 
 import * as actions from "../../../../store/actions/actions";
-import nav from "../../../../history/nav";
 
 class CreateTaskPageContainer extends Component {
   constructor(props) {
@@ -61,27 +59,15 @@ class CreateTaskPageContainer extends Component {
     if (!this.validateBeforeSend()) {
       return;
     }
-    const link = `/api/users/${this.props.userId}/tasks`;
-    this.props.createTaskStart();
-    Axios.post(link, {
-      task: {
-        title: this.state.title,
-        priority: this.state.priority,
-        due_date: new Date(this.state.due_date),
-        description: this.state.description
-      }
-    })
-      .then(res => {
-        this.props.createTaskSuccess(res.data);
-        nav("/");
-      })
-      .catch(err => {
-        this.props.createTaskFail();
-        console.log(err);
-        this.setState({
-          errors: ["Something went wrong!"]
-        });
-      });
+
+    const task = {
+      title: this.state.title,
+      priority: this.state.priority,
+      due_date: new Date(this.state.due_date),
+      description: this.state.description
+    };
+
+    this.props.createTaskStart(task);
   }
 
   validateBeforeSend() {
@@ -120,27 +106,15 @@ class CreateTaskPageContainer extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    userId: state.user.id
-  };
-}
-
 function mapDispatchToProps(dispatch) {
   return {
-    createTaskStart: () => {
-      dispatch(actions.createTaskStart());
-    },
-    createTaskSuccess: task => {
-      dispatch(actions.createTaskSuccess(task));
-    },
-    createTaskFail: () => {
-      dispatch(actions.createTaskFail());
+    createTaskStart: task => {
+      dispatch(actions.createTaskStart(task));
     }
   };
 }
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps
 )(CreateTaskPageContainer);
