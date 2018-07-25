@@ -30,24 +30,8 @@ class ShowTaskPageContainer extends Component {
 
   handleDelete(e) {
     e.preventDefault();
-    const userId = this.props.userId;
     const taskId = +this.props.match.params.task_id;
-    const link = `/api/users/${userId}/tasks/${taskId}`;
-    this.props.deleteTaskStart();
-    Axios.delete(link, {
-      params: {
-        id: taskId
-      }
-    })
-      .then(res => {
-        this.props.deleteTaskSuccess(taskId);
-        nav("/");
-      })
-      .catch(err => {
-        console.log("FAIL DELETE");
-        console.dir(err);
-        this.props.deleteTaskFail();
-      });
+    this.props.deleteTaskStart(taskId);
   }
 
   render() {
@@ -75,8 +59,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    deleteTaskStart: () => {
-      dispatch(actions.deleteTaskStart());
+    deleteTaskStart: id => {
+      dispatch(actions.deleteTaskStart(id));
     },
     deleteTaskSuccess: taskId => {
       dispatch(actions.deleteTaskSuccess(taskId));

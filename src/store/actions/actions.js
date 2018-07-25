@@ -111,9 +111,10 @@ export const createTaskFail = () => {
 
 // Delete task actions
 
-export const deleteTaskStart = () => {
+export const deleteTaskStart = id => {
   return {
-    type: DELETE_TASK_START
+    type: DELETE_TASK_START,
+    taskId: id
   };
 };
 

@@ -88,24 +88,7 @@ class TaskTableContainer extends Component {
   }
 
   deleteTask(id) {
-    const userId = this.props.userId;
-    const taskId = id;
-    const link = `/api/users/${userId}/tasks/${taskId}`;
-
-    this.props.deleteTaskStart();
-    Axios.delete(link, {
-      params: {
-        id: taskId
-      }
-    })
-      .then(res => {
-        this.props.deleteTaskSuccess(taskId);
-      })
-      .catch(err => {
-        console.log("FAIL DELETE");
-        console.dir(err);
-        this.props.deleteTaskFail();
-      });
+    this.props.deleteTaskStart(id);
   }
 
   sort() {
@@ -272,14 +255,8 @@ function mapDispatchToProps(dispatch) {
     deleteMultipleTasksFail: () => {
       dispatch(actions.deleteMultipleTasksFail());
     },
-    deleteTaskStart: () => {
-      dispatch(actions.deleteTaskStart());
-    },
-    deleteTaskSuccess: taskId => {
-      dispatch(actions.deleteTaskSuccess(taskId));
-    },
-    deleteTaskFail: () => {
-      dispatch(actions.deleteTaskFail());
+    deleteTaskStart: id => {
+      dispatch(actions.deleteTaskStart(id));
     }
   };
 }
