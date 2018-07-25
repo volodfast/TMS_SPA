@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Axios from "axios";
 
 import ShowTaskPage from "./ShowTaskPage/ShowTaskPage";
 
 import * as actions from "../../../../store/actions/actions";
-import nav from "../../../../history/nav";
 
 class ShowTaskPageContainer extends Component {
   constructor(props) {
@@ -52,8 +50,7 @@ class ShowTaskPageContainer extends Component {
 function mapStateToProps(state) {
   return {
     activeTasks: state.tasks.active,
-    finishedTasks: state.tasks.finished,
-    userId: state.user.id
+    finishedTasks: state.tasks.finished
   };
 }
 
@@ -61,12 +58,6 @@ function mapDispatchToProps(dispatch) {
   return {
     deleteTaskStart: id => {
       dispatch(actions.deleteTaskStart(id));
-    },
-    deleteTaskSuccess: taskId => {
-      dispatch(actions.deleteTaskSuccess(taskId));
-    },
-    deleteTaskFail: () => {
-      dispatch(actions.deleteTaskFail());
     }
   };
 }
