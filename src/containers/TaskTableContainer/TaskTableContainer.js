@@ -201,7 +201,12 @@ class TaskTableContainer extends Component {
   }
 
   componentWillUnmount() {
-    this.props.handleSelectedOnUnmount(this.state.selectedIds);
+    const taskIds = this.props.tasks.map(task => task.id);
+    const ids = this.state.selectedIds.filter(id => {
+      if (!taskIds.includes(id)) return false;
+      return true;
+    });
+    this.props.handleSelectedOnUnmount(ids);
   }
 
   render() {
