@@ -123,11 +123,11 @@ class TaskTableContainer extends Component {
       return this.sortByDueDate(sortedHow);
     }
 
-    return this.props.tasks;
+    return this.props.tasks.concat();
   }
 
   sortByPriority(sortedHow) {
-    let tasks = this.props.tasks;
+    let tasks = this.props.tasks.concat();
     tasks.sort((a, b) => {
       if (sortedHow === "desc") {
         return b.priority - a.priority;
@@ -141,7 +141,7 @@ class TaskTableContainer extends Component {
   }
 
   sortByTitle(sortedHow) {
-    let tasks = this.props.tasks;
+    let tasks = this.props.tasks.concat();
     tasks.sort((a, b) => {
       if (sortedHow === "asc") {
         return b.title.localeCompare(a.title);
@@ -155,7 +155,7 @@ class TaskTableContainer extends Component {
   }
 
   sortByDueDate(sortedHow) {
-    let tasks = this.props.tasks;
+    let tasks = this.props.tasks.concat();
     tasks.sort((a, b) => {
       const aDate = new Date(a.due_date).getTime();
       const bDate = new Date(b.due_date).getTime();
