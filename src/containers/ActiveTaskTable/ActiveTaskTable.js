@@ -12,6 +12,11 @@ class ActiveTaskTable extends Component {
 
     this.completeSelected = this.completeSelected.bind(this);
     this.getSelectedFiltered = this.getSelectedFiltered.bind(this);
+    this.changeSort = this.changeSort.bind(this);
+  }
+
+  changeSort({ by, how }) {
+    this.props.changeActiveTableSort({ by, how });
   }
 
   completeSelected(ids) {
@@ -59,6 +64,9 @@ class ActiveTaskTable extends Component {
           active: "Number of active tasks:"
         }}
         handleSelected={handleSelected}
+        sortBy={this.props.sortBy}
+        sortHow={this.props.sortHow}
+        changeSort={this.changeSort}
       />
     );
   }
@@ -67,7 +75,9 @@ class ActiveTaskTable extends Component {
 function mapStateToProps(state) {
   return {
     userId: state.user.id,
-    selectedActive: state.cache.selectedIds.active
+    selectedActive: state.cache.selectedIds.active,
+    sortBy: state.tasks.activeTableSort.by,
+    sortHow: state.tasks.activeTableSort.how
   };
 }
 
@@ -84,6 +94,9 @@ function mapDispatchToProps(dispatch) {
     },
     addSelectedActiveTaskIdsToCache: ids => {
       dispatch(actions.addSelectedActiveTaskIdsToCache(ids));
+    },
+    changeActiveTableSort: ({ by, how }) => {
+      dispatch(actions.changeActiveTableSort({ by, how }));
     }
   };
 }

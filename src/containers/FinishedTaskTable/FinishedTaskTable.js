@@ -12,6 +12,11 @@ class FinishedTaskTable extends Component {
 
     this.uncompleteSelected = this.uncompleteSelected.bind(this);
     this.getSelectedFiltered = this.getSelectedFiltered.bind(this);
+    this.changeSort = this.changeSort.bind(this);
+  }
+
+  changeSort({ by, how }) {
+    this.props.changeFinishedTableSort({ by, how });
   }
 
   uncompleteSelected(ids) {
@@ -59,6 +64,9 @@ class FinishedTaskTable extends Component {
           active: "Number of finished tasks:"
         }}
         handleSelected={handleSelected}
+        sortBy={this.props.sortBy}
+        sortHow={this.props.sortHow}
+        changeSort={this.changeSort}
       />
     );
   }
@@ -67,7 +75,9 @@ class FinishedTaskTable extends Component {
 function mapStateToProps(state) {
   return {
     userId: state.user.id,
-    selectedFinished: state.cache.selectedIds.finished
+    selectedFinished: state.cache.selectedIds.finished,
+    sortBy: state.tasks.finishedTableSort.by,
+    sortHow: state.tasks.finishedTableSort.how
   };
 }
 
@@ -84,6 +94,9 @@ function mapDispatchToProps(dispatch) {
     },
     addSelectedFinishedTaskIdsToCache: ids => {
       dispatch(actions.addSelectedFinishedTaskIdsToCache(ids));
+    },
+    changeFinishedTableSort: ({ by, how }) => {
+      dispatch(actions.changeFinishedTableSort({ by, how }));
     }
   };
 }

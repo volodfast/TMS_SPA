@@ -1,3 +1,12 @@
 .task-table table {
   text-align: center;
 }
+
+.task-table .sorting-label {
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.task-table .sorting-label:hover {
+  color: green;
+  cursor: pointer;
+}

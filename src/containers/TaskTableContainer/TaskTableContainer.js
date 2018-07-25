@@ -20,6 +20,9 @@ class TaskTableContainer extends Component {
     this.uncheckAll = this.uncheckAll.bind(this);
     this.deleteSelected = this.deleteSelected.bind(this);
     this.deleteTask = this.deleteTask.bind(this);
+    this.handleClickTitle = this.handleClickTitle.bind(this);
+    this.handleClickPriority = this.handleClickPriority.bind(this);
+    this.handleClickDueDate = this.handleClickDueDate.bind(this);
   }
 
   onToggleSelect(id) {
@@ -105,6 +108,98 @@ class TaskTableContainer extends Component {
       });
   }
 
+  sort() {
+    const sortedBy = this.props.sortBy;
+    const sortedHow = this.props.sortHow;
+    if (sortedBy === "priority") {
+      return this.sortByPriority(sortedHow);
+    }
+
+    if (sortedBy === "title") {
+      return this.sortByTitle(sortedHow);
+    }
+
+    if (sortedBy === "dueDate") {
+      return this.sortByDueDate(sortedHow);
+    }
+
+    return this.props.tasks;
+  }
+
+  sortByPriority(sortedHow) {
+    let tasks = this.props.tasks;
+    tasks.sort((a, b) => {
+      if (sortedHow === "desc") {
+        return b.priority - a.priority;
+      }
+      if (sortedHow === "asc") {
+        return a.priority - b.priority;
+      }
+      return 0;
+    });
+    return tasks;
+  }
+
+  sortByTitle(sortedHow) {
+    let tasks = this.props.tasks;
+    tasks.sort((a, b) => {
+      if (sortedHow === "asc") {
+        return b.title.localeCompare(a.title);
+      }
+      if (sortedHow === "desc") {
+        return a.title.localeCompare(b.title);
+      }
+      return 0;
+    });
+    return tasks;
+  }
+
+  sortByDueDate(sortedHow) {
+    let tasks = this.props.tasks;
+    tasks.sort((a, b) => {
+      const aDate = new Date(a.due_date).getTime();
+      const bDate = new Date(b.due_date).getTime();
+      if (sortedHow === "desc") {
+        return bDate - aDate;
+      }
+      if (sortedHow === "asc") {
+        return aDate - bDate;
+      }
+      return 0;
+    });
+    return tasks;
+  }
+
+  handleClickTitle() {
+    let how = "desc";
+    if (this.props.sortBy === "title") {
+      if (this.props.sortHow === "desc") {
+        how = "asc";
+      }
+    }
+    this.props.changeSort({ by: "title", how });
+  }
+
+  handleClickPriority() {
+    let how = "desc";
+    if (this.props.sortBy === "priority") {
+      if (this.props.sortHow === "desc") {
+        how = "asc";
+      }
+    }
+    this.props.changeSort({ by: "priority", how });
+  }
+
+  handleClickDueDate() {
+    let how = "desc";
+    if (this.props.sortBy === "dueDate") {
+      if (this.props.sortHow === "desc") {
+        how = "asc";
+      }
+    }
+    this.props.changeSort({ by: "dueDate", how });
+  }
+
   componentWillUnmount() {
     this.props.handleSelectedOnUnmount(this.state.selectedIds);
   }
@@ -129,6 +224,8 @@ class TaskTableContainer extends Component {
       );
     }
 
+    const tasks = this.sort();
+
     return (
       <div>
         <TaskTableControls
@@ -140,10 +237,13 @@ class TaskTableContainer extends Component {
           button={button}
         />
         <TaskTable
-          tasks={this.props.tasks}
+          tasks={tasks}
           selectedTaskIds={this.state.selectedIds}
           onToggleSelect={this.onToggleSelect}
           deleteTask={this.deleteTask}
+          clickTitle={this.handleClickTitle}
+          clickPriority={this.handleClickPriority}
+          clickDueDate={this.handleClickDueDate}
         />
       </div>
     );

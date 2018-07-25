@@ -29,7 +29,9 @@ import {
   UPDATE_ACTIVE_MULTIPLE_TASKS_FAIL,
   CHANGE_TASKS_ACTIVE_TAB,
   ADD_SELECTED_ACTIVE_TASK_IDS_TO_CACHE,
-  ADD_SELECTED_FINISHED_TASK_IDS_TO_CACHE
+  ADD_SELECTED_FINISHED_TASK_IDS_TO_CACHE,
+  CHANGE_ACTIVE_TABLE_SORT,
+  CHANGE_FINISHED_TABLE_SORT
 } from "./actions/actionTypes";
 
 const initialState = {
@@ -54,6 +56,14 @@ const initialState = {
   tasks: {
     active: [],
     finished: [],
+    activeTableSort: {
+      by: "priority",
+      how: "desc"
+    },
+    finishedTableSort: {
+      by: "priority",
+      how: "desc"
+    },
     loading: false,
     activeTab: "active",
     creation: {
@@ -160,6 +170,11 @@ export default function(state = initialState, action) {
       return add_selected_active_task_ids_to_cache(state, action);
     case ADD_SELECTED_FINISHED_TASK_IDS_TO_CACHE:
       return add_selected_finished_task_ids_to_cache(state, action);
+
+    case CHANGE_ACTIVE_TABLE_SORT:
+      return change_active_table_sort(state, action);
+    case CHANGE_FINISHED_TABLE_SORT:
+      return change_finished_table_sort(state, action);
 
     default:
       return state;
@@ -673,6 +688,34 @@ function add_selected_finished_task_ids_to_cache(state, action) {
       selectedIds: {
         ...state.cache.selectedIds,
         finished: action.ids
+      }
+    }
+  };
+}
+
+// Change sorting of active and finsihed tables reduce helpers
+
+function change_active_table_sort(state, action) {
+  return {
+    ...state,
+    tasks: {
+      ...state.tasks,
+      activeTableSort: {
+        how: action.how,
+        by: action.by
+      }
+    }
+  };
+}
+
+function change_finished_table_sort(state, action) {
+  return {
+    ...state,
+    tasks: {
+      ...state.tasks,
+      finishedTableSort: {
+        how: action.how,
+        by: action.by
       }
     }
   };

@@ -29,7 +29,9 @@ import {
   UPDATE_ACTIVE_MULTIPLE_TASKS_FAIL,
   CHANGE_TASKS_ACTIVE_TAB,
   ADD_SELECTED_ACTIVE_TASK_IDS_TO_CACHE,
-  ADD_SELECTED_FINISHED_TASK_IDS_TO_CACHE
+  ADD_SELECTED_FINISHED_TASK_IDS_TO_CACHE,
+  CHANGE_ACTIVE_TABLE_SORT,
+  CHANGE_FINISHED_TABLE_SORT
 } from "./actionTypes";
 
 // TASKS load
@@ -259,5 +261,23 @@ export const addSelectedFinishedTaskIdsToCache = ids => {
   return {
     type: ADD_SELECTED_FINISHED_TASK_IDS_TO_CACHE,
     ids: ids
+  };
+};
+
+// Change sorting in active and finished tables
+
+export const changeActiveTableSort = ({ by, how }) => {
+  return {
+    type: CHANGE_ACTIVE_TABLE_SORT,
+    by,
+    how
+  };
+};
+
+export const changeFinishedTableSort = ({ by, how }) => {
+  return {
+    type: CHANGE_FINISHED_TABLE_SORT,
+    by,
+    how
   };
 };

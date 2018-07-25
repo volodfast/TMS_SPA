@@ -23,13 +23,28 @@ const TaskTable = props => {
   });
 
   return (
-    <table className="table-striped table-hover table-tasks">
+    <table className="table-striped table-hover task-table">
       <thead>
         <tr className="table_head">
           <th className="col-md-1 text-center checkbox_column" />
-          <th className="col-md-2 text-center title_column">Title</th>
-          <th className="col-md-2 text-center due_date_column">Due Date</th>
-          <th className="col-md-1 text-center priority_column">Priority</th>
+          <th
+            className="col-md-2 text-center title_column sorting-label"
+            onClick={props.clickTitle}
+          >
+            Title
+          </th>
+          <th
+            className="col-md-2 text-center due_date_column sorting-label"
+            onClick={props.clickDueDate}
+          >
+            Due Date
+          </th>
+          <th
+            className="col-md-1 text-center priority_column sorting-label"
+            onClick={props.clickPriority}
+          >
+            Priority
+          </th>
           <th className="col-md-1 text-center edit_task_column" />
           <th className="col-md-1 text-center delete_task_column" />
         </tr>
