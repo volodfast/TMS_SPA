@@ -487,14 +487,15 @@ function create_user_start(state, action) {
 }
 
 function create_user_success(state, action) {
+  const { user } = action;
   return {
     ...state,
     user: {
       ...state.user,
-      id: action.id,
-      first_name: action.first_name,
-      last_name: action.last_name,
-      email: action.email,
+      id: user.id,
+      first_name: user.first_name,
+      last_name: user.last_name,
+      email: user.email,
       creation: {
         creating: true,
         created: false

@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Axios from "axios";
 
 import CreateUserPage from "./CreateUserPage/CreateUserPage";
 
 import * as actions from "../../../store/actions/actions";
-import nav from "../../../history/nav";
 
 class CreateUserPageContainer extends Component {
   constructor(props) {
@@ -74,34 +72,8 @@ class CreateUserPageContainer extends Component {
       password: this.state.password.trim(),
       password_confirmation: this.state.password_confirmation.trim()
     };
-    const link = `/api/users`;
 
-    this.props.createUserStart();
-    Axios.post(link, {
-      user: user
-    })
-      .then(res => {
-        this.props.createUserSuccess(res.data);
-        nav("/login");
-      })
-      .catch(err => {
-        if (err.response.status === 422) {
-          let errorsObj = err.response.data;
-          let errors = [];
-          for (let title in errorsObj) {
-            for (let i = 0; i < errorsObj[title].length; i++) {
-              const errMsg = `${title} ${errorsObj[title][i]}`;
-              errors.push(errMsg);
-            }
-          }
-          this.setState({
-            errors: errors
-          });
-        }
-
-        console.dir(err);
-        this.props.createUserFail();
-      });
+    this.props.createUserStart(user);
   }
 
   validateBeforeSend() {
@@ -168,14 +140,8 @@ class CreateUserPageContainer extends Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    createUserStart: () => {
-      dispatch(actions.createUserStart());
-    },
-    createUserSuccess: user => {
-      dispatch(actions.createUserSuccess(user));
-    },
-    createUserFail: () => {
-      dispatch(actions.createUserFail());
+    createUserStart: user => {
+      dispatch(actions.createUserStart(user));
     }
   };
 }

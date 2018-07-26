@@ -177,19 +177,17 @@ export const editUserFail = () => {
 
 // Create user actions
 
-export const createUserStart = () => {
+export const createUserStart = user => {
   return {
-    type: CREATE_USER_START
+    type: CREATE_USER_START,
+    user
   };
 };
 
 export const createUserSuccess = user => {
   return {
     type: CREATE_USER_SUCCESS,
-    id: user.id,
-    first_name: user.first_name,
-    last_name: user.last_name,
-    email: user.email
+    user
   };
 };
 

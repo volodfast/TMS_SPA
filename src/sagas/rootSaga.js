@@ -9,6 +9,7 @@ import watchEditTask from "./taskSagas/editTaskSaga";
 
 // User sagas
 import watchEditUser from "./userSagas/editUserSaga";
+import watchCreateUser from "./userSagas/createUserSaga";
 
 export default function* rootSaga() {
   yield all([
@@ -17,6 +18,7 @@ export default function* rootSaga() {
     watchCreateTask(),
     watchUpdateActiveMultipleTasks(),
     watchEditTask(),
-    watchEditUser()
+    watchEditUser(),
+    watchCreateUser()
   ]);
 }
