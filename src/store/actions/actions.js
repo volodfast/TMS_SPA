@@ -222,9 +222,11 @@ export const deleteMultipleTasksFail = () => {
 
 // Update active multiple tasks actions
 
-export const updateActiveMultipleTasksStart = () => {
+export const updateActiveMultipleTasksStart = (task_ids, isActive) => {
   return {
-    type: UPDATE_ACTIVE_MULTIPLE_TASKS_START
+    type: UPDATE_ACTIVE_MULTIPLE_TASKS_START,
+    ids: task_ids,
+    isActive
   };
 };
 

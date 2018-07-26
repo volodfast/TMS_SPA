@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Axios from "axios";
 
 import TaskTableContainer from "../TaskTableContainer/TaskTableContainer";
 
@@ -21,17 +20,8 @@ class ActiveTaskTable extends Component {
   completeSelected(ids) {
     if (ids.length === 0) return;
 
-    const link = `/api/users/${this.props.userId}/tasks/change_active_multiple`;
     const active = false;
-    this.props.updateActiveMultipleTasksStart();
-    Axios.put(link, { ids: ids, active: active })
-      .then(res => {
-        this.props.updateActiveMultipleTasksSuccess(res.data.ids, active);
-      })
-      .catch(err => {
-        console.dir(err);
-        this.props.updateActiveMultipleTasksFail();
-      });
+    this.props.updateActiveMultipleTasksStart(ids, active);
   }
 
   render() {
@@ -61,7 +51,6 @@ class ActiveTaskTable extends Component {
 
 function mapStateToProps(state) {
   return {
-    userId: state.user.id,
     selectedActive: state.cache.selectedIds.active,
     sortBy: state.tasks.activeTableSort.by,
     sortHow: state.tasks.activeTableSort.how
@@ -70,14 +59,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    updateActiveMultipleTasksStart: () => {
-      dispatch(actions.updateActiveMultipleTasksStart());
-    },
-    updateActiveMultipleTasksSuccess: (task_ids, active) => {
-      dispatch(actions.updateActiveMultipleTasksSuccess(task_ids, active));
-    },
-    updateActiveMultipleTasksFail: () => {
-      dispatch(actions.updateActiveMultipleTasksFail());
+    updateActiveMultipleTasksStart: (ids, active) => {
+      dispatch(actions.updateActiveMultipleTasksStart(ids, active));
     },
     addSelectedActiveTaskIdsToCache: ids => {
       dispatch(actions.addSelectedActiveTaskIdsToCache(ids));

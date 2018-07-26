@@ -19,7 +19,6 @@ function* deleteTask(action) {
     yield put(deleteTaskSuccess(taskId));
     nav("/");
   } catch (error) {
-    console.log("ERRORR");
     yield put(deleteTaskFail());
   }
 }
