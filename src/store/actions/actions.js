@@ -155,18 +155,17 @@ export const editTaskFail = () => {
 
 // Edit user actions
 
-export const editUserStart = () => {
+export const editUserStart = user => {
   return {
-    type: EDIT_USER_START
+    type: EDIT_USER_START,
+    user
   };
 };
 
 export const editUserSuccess = user => {
   return {
     type: EDIT_USER_SUCCESS,
-    first_name: user.first_name,
-    last_name: user.last_name,
-    email: user.email
+    user
   };
 };
 

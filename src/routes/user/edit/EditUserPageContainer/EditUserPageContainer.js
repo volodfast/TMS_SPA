@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Axios from "axios";
 
 import EditUserPage from "./EditUserPage/EditUserPage";
 
 import * as actions from "../../../../store/actions/actions";
-import nav from "../../../../history/nav";
 
 class EditUserPageContainer extends Component {
   constructor(props) {
@@ -79,17 +77,7 @@ class EditUserPageContainer extends Component {
       user.password_confirmation = this.state.password_confirmation;
     }
 
-    const link = `/api/users/${this.props.userId}`;
-    this.props.editUserStart();
-    Axios.put(link, { user: user })
-      .then(res => {
-        this.props.editUserSuccess(res.data);
-        nav("/");
-      })
-      .catch(err => {
-        console.dir(err);
-        this.props.editUserFail();
-      });
+    this.props.editUserStart(user);
   }
 
   validateBeforeSend() {
@@ -156,7 +144,6 @@ class EditUserPageContainer extends Component {
 
 function mapStateToProps(state) {
   return {
-    userId: state.user.id,
     userFirstName: state.user.first_name,
     userLastName: state.user.last_name,
     userEmail: state.user.email
@@ -164,14 +151,8 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
   return {
-    editUserStart: () => {
-      dispatch(actions.editUserStart());
-    },
-    editUserSuccess: user => {
-      dispatch(actions.editUserSuccess(user));
-    },
-    editUserFail: () => {
-      dispatch(actions.editTaskFail());
+    editUserStart: user => {
+      dispatch(actions.editUserStart(user));
     }
   };
 }

@@ -442,13 +442,14 @@ function edit_user_start(state, action) {
 }
 
 function edit_user_success(state, action) {
+  const { user } = action;
   return {
     ...state,
     user: {
       ...state.user,
-      first_name: action.first_name,
-      last_name: action.last_name,
-      email: action.email,
+      first_name: user.first_name,
+      last_name: user.last_name,
+      email: user.email,
       editing: {
         updating: false,
         updated: true

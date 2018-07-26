@@ -7,12 +7,16 @@ import watchCreateTask from "./taskSagas/createTaskSaga";
 import watchUpdateActiveMultipleTasks from "./taskSagas/updateActiveMultipleTasksSaga";
 import watchEditTask from "./taskSagas/editTaskSaga";
 
+// User sagas
+import watchEditUser from "./userSagas/editUserSaga";
+
 export default function* rootSaga() {
   yield all([
     watchDeleteTask(),
     watchDeleteMultipleTasks(),
     watchCreateTask(),
     watchUpdateActiveMultipleTasks(),
-    watchEditTask()
+    watchEditTask(),
+    watchEditUser()
   ]);
 }
