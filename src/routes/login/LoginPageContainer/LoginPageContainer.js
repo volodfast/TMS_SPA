@@ -4,7 +4,6 @@ import Axios from "axios";
 
 import LoginPage from "./LoginPage/LoginPage";
 import * as actions from "../../../store/actions/actions";
-import nav from "../../../history/nav";
 
 class LoginPageContainer extends Component {
   constructor(props) {
@@ -46,12 +45,6 @@ class LoginPageContainer extends Component {
         Axios.defaults.headers["Authorization"] = "Bearer " + token;
 
         this.props.loadAllTasksStart();
-        return Axios.get(`/api/users/${user.id}/tasks`);
-      })
-      .then(res => {
-        const tasks = res.data;
-        this.props.loadAllTasksSuccess(tasks);
-        nav("/");
       })
       .catch(err => {
         let errText = "Something went wrong!";
@@ -107,12 +100,6 @@ function mapDispatchToProps(dispatch) {
     },
     loadAllTasksStart: () => {
       dispatch(actions.loadAllTasksStart());
-    },
-    loadAllTasksSuccess: tasks => {
-      dispatch(actions.loadAllTasksSuccess(tasks));
-    },
-    loadAllTasksFail: errMsg => {
-      dispatch(actions.loadAllTasksFail(errMsg));
     }
   };
 }

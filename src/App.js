@@ -45,12 +45,8 @@ class App extends Component {
           Axios.defaults.headers["Authorization"] = "Bearer " + token;
 
           this.props.loadAllTasksStart();
+        })
 
-          return Axios.get(`${baseUrl}/tasks`);
-        })
-        .then(res => {
-          this.props.loadAllTasksSuccess(res.data);
-        })
         .catch(err => {
           if (errType === 1) {
             this.props.authFail(errMsg);
@@ -128,12 +124,6 @@ const mapDispatchToProps = dispatch => {
     },
     loadAllTasksStart: () => {
       dispatch(actions.loadAllTasksStart());
-    },
-    loadAllTasksSuccess: tasks => {
-      dispatch(actions.loadAllTasksSuccess(tasks));
-    },
-    loadAllTasksFail: errMsg => {
-      dispatch(actions.loadAllTasksFail(errMsg));
     }
   };
 };

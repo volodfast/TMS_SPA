@@ -6,6 +6,7 @@ import watchDeleteMultipleTasks from "./taskSagas/deleteMultipleTasksSaga";
 import watchCreateTask from "./taskSagas/createTaskSaga";
 import watchUpdateActiveMultipleTasks from "./taskSagas/updateActiveMultipleTasksSaga";
 import watchEditTask from "./taskSagas/editTaskSaga";
+import watchLoadAllTasks from "./taskSagas/loadAllTasksSaga";
 
 // User sagas
 import watchEditUser from "./userSagas/editUserSaga";
@@ -18,6 +19,7 @@ export default function* rootSaga() {
     watchCreateTask(),
     watchUpdateActiveMultipleTasks(),
     watchEditTask(),
+    watchLoadAllTasks(),
     watchEditUser(),
     watchCreateUser()
   ]);
