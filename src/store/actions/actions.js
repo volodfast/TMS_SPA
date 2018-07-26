@@ -134,15 +134,17 @@ export const deleteTaskFail = () => {
 
 // Edit task actions
 
-export const editTaskStart = () => {
+export const editTaskStart = (task, taskId) => {
   return {
-    type: EDIT_TASK_START
+    type: EDIT_TASK_START,
+    task,
+    taskId
   };
 };
 export const editTaskSuccess = task => {
   return {
     type: EDIT_TASK_SUCCESS,
-    task: task
+    task
   };
 };
 export const editTaskFail = () => {

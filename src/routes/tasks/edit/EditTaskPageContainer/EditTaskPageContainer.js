@@ -2,12 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import moment from "moment";
-import Axios from "axios";
 
 import EditTaskPage from "./EditTaskPage/EditTaskPage";
 
 import * as actions from "../../../../store/actions/actions";
-import nav from "../../../../history/nav";
 
 class EditTaskPageContainer extends Component {
   constructor(props) {
@@ -19,17 +17,17 @@ class EditTaskPageContainer extends Component {
       task = {
         title: "",
         priority: 0,
-        due_date: moment(),
+        due_date: moment().valueOf(),
         description: ""
       };
+      this.empty = true;
     }
 
     this.state = {
       title: task.title,
       priority: task.priority,
       due_date: task.due_date,
-      description: task.description,
-      errors: []
+      description: task.description
     };
 
     this.findTaskById = this.findTaskById.bind(this);
@@ -71,30 +69,16 @@ class EditTaskPageContainer extends Component {
     if (!this.validateBeforeSend()) {
       return;
     }
-    const userId = this.props.userId;
+    const task = {
+      title: this.state.title,
+      priority: this.state.priority,
+      due_date: new Date(this.state.due_date),
+      description: this.state.description
+    };
+
     const taskId = this.props.match.params.task_id;
 
-    const link = `/api/users/${userId}/tasks/${taskId}`;
-    this.props.editTaskStart();
-    Axios.put(link, {
-      task: {
-        title: this.state.title,
-        priority: this.state.priority,
-        due_date: new Date(this.state.due_date),
-        description: this.state.description
-      }
-    })
-      .then(res => {
-        this.props.editTaskSuccess(res.data);
-        nav("/");
-      })
-      .catch(err => {
-        this.props.editTaskFail();
-        console.log(err);
-        this.setState({
-          errors: ["Something went wrong!"]
-        });
-      });
+    this.props.editTaskStart(task, taskId);
   }
 
   validateBeforeSend() {
@@ -132,10 +116,9 @@ class EditTaskPageContainer extends Component {
   }
 
   render() {
-    const id = +this.props.match.params.task_id;
-    const task = this.findTaskById(id);
+    const task = { ...this.state };
 
-    if (task === null) {
+    if (this.empty === true) {
       return (
         <div style={{ fontSize: "24px", marginTop: "15px" }}>
           You have no such task!
@@ -159,21 +142,14 @@ class EditTaskPageContainer extends Component {
 function mapStateToProps(state) {
   return {
     activeTasks: state.tasks.active,
-    finishedTasks: state.tasks.finished,
-    userId: state.user.id
+    finishedTasks: state.tasks.finished
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    editTaskStart: () => {
-      dispatch(actions.editTaskStart());
-    },
-    editTaskSuccess: task => {
-      dispatch(actions.editTaskSuccess(task));
-    },
-    editTaskFail: () => {
-      dispatch(actions.editTaskFail());
+    editTaskStart: (task, taskId) => {
+      dispatch(actions.editTaskStart(task, taskId));
     }
   };
 }
