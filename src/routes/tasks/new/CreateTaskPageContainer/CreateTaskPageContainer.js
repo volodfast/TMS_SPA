@@ -14,7 +14,7 @@ class CreateTaskPageContainer extends Component {
     this.state = {
       title: "",
       priority: 0,
-      due_date: moment().valueOf(),
+      due_date: moment(new Date().getTime() + 1800000).valueOf(),
       description: "",
       errors: []
     };
