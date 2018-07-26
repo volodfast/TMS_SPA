@@ -29,27 +29,41 @@ class CreateTaskPageContainer extends Component {
   }
 
   handleTitleChange(e) {
-    this.setState({
-      title: e.target.value
+    e.persist();
+
+    this.setState(state => {
+      return {
+        title: e.target.value
+      };
     });
   }
 
   handlePriorityChange(e) {
-    this.setState({
-      priority: +e.target.value
+    e.persist();
+
+    this.setState(state => {
+      return {
+        priority: +e.target.value
+      };
     });
   }
 
   handleDueDateChange(momentDate) {
     const date = momentDate ? momentDate.valueOf() : moment().valueOf();
-    this.setState({
-      due_date: date
+    this.setState(state => {
+      return {
+        due_date: date
+      };
     });
   }
 
   handleDescriptionChange(e) {
-    this.setState({
-      description: e.target.value
+    e.persist();
+
+    this.setState(state => {
+      return {
+        description: e.target.value
+      };
     });
   }
 
@@ -85,8 +99,10 @@ class CreateTaskPageContainer extends Component {
     if (due_date <= moment().valueOf()) {
       errors.push("Due date can't be in past");
     }
-    this.setState({
-      errors: errors
+    this.setState(state => {
+      return {
+        errors: errors
+      };
     });
     return errors.length === 0 ? true : false;
   }

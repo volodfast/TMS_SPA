@@ -29,14 +29,22 @@ class LoginPageContainer extends Component {
   }
 
   handleEmailChange(e) {
-    this.setState({
-      email: e.target.value
+    e.persist();
+
+    this.setState(state => {
+      return {
+        email: e.target.value
+      };
     });
   }
 
   handlePasswordChange(e) {
-    this.setState({
-      password: e.target.value
+    e.persist();
+
+    this.setState(state => {
+      return {
+        password: e.target.value
+      };
     });
   }
 

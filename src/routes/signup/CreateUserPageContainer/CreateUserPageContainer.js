@@ -29,32 +29,51 @@ class CreateUserPageContainer extends Component {
   }
 
   handleFirstNameChange(e) {
-    this.setState({
-      first_name: e.target.value
+    e.persist();
+    this.setState(state => {
+      return {
+        first_name: e.target.value
+      };
     });
   }
 
   handleLastNameChange(e) {
-    this.setState({
-      last_name: e.target.value
+    e.persist();
+
+    this.setState(state => {
+      return {
+        last_name: e.target.value
+      };
     });
   }
 
   handleEmailChange(e) {
-    this.setState({
-      email: e.target.value
+    e.persist();
+
+    this.setState(state => {
+      return {
+        email: e.target.value
+      };
     });
   }
 
   handlePasswordChange(e) {
-    this.setState({
-      password: e.target.value
+    e.persist();
+
+    this.setState(state => {
+      return {
+        password: e.target.value
+      };
     });
   }
 
   handlePasswordConfirmationChange(e) {
-    this.setState({
-      password_confirmation: e.target.value
+    e.persist();
+
+    this.setState(state => {
+      return {
+        password_confirmation: e.target.value
+      };
     });
   }
 
@@ -106,8 +125,10 @@ class CreateUserPageContainer extends Component {
     }
 
     if (errors.length !== 0) {
-      this.setState({
-        errors: errors
+      this.setState(state => {
+        return {
+          errors: errors
+        };
       });
     }
 
