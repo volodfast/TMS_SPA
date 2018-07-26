@@ -1,10 +1,10 @@
 import { takeEvery, select, put, call } from "redux-saga/es/effects";
 import Axios from "axios";
 
-import { CREATE_TASK_START } from "../store/actions/actionTypes";
-import { createTaskSuccess, createTaskFail } from "../store/actions/actions";
+import { CREATE_TASK_START } from "../../store/actions/actionTypes";
+import { createTaskSuccess, createTaskFail } from "../../store/actions/actions";
 
-import nav from "../history/nav";
+import nav from "../../history/nav";
 
 function* createTask(action) {
   const { task } = action;

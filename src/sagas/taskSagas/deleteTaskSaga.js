@@ -1,10 +1,10 @@
 import { takeEvery, select, put, call } from "redux-saga/es/effects";
 import Axios from "axios";
 
-import { DELETE_TASK_START } from "../store/actions/actionTypes";
-import { deleteTaskSuccess, deleteTaskFail } from "../store/actions/actions";
+import { DELETE_TASK_START } from "../../store/actions/actionTypes";
+import { deleteTaskSuccess, deleteTaskFail } from "../../store/actions/actions";
 
-import nav from "../history/nav";
+import nav from "../../history/nav";
 
 function* deleteTask(action) {
   const { taskId } = action;

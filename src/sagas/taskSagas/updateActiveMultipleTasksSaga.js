@@ -1,12 +1,12 @@
 import { takeEvery, select, call, put } from "redux-saga/es/effects";
 import Axios from "axios";
 
-import { UPDATE_ACTIVE_MULTIPLE_TASKS_START } from "../store/actions/actionTypes";
+import { UPDATE_ACTIVE_MULTIPLE_TASKS_START } from "../../store/actions/actionTypes";
 
 import {
   updateActiveMultipleTasksSuccess,
   updateActiveMultipleTasksFail
-} from "../store/actions/actions";
+} from "../../store/actions/actions";
 
 function* updateActiveMultipleTasks(action) {
   try {

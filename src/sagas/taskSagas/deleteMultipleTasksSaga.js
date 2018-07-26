@@ -1,11 +1,11 @@
 import { call, takeEvery, put, select } from "redux-saga/es/effects";
 import Axios from "axios";
 
-import { DELETE_MULTIPLE_TASKS_START } from "../store/actions/actionTypes";
+import { DELETE_MULTIPLE_TASKS_START } from "../../store/actions/actionTypes";
 import {
   deleteMultipleTasksSuccess,
   deleteMultipleTasksFail
-} from "../store/actions/actions";
+} from "../../store/actions/actions";
 
 function* deleteMultipleTasks(action) {
   const { taskIds } = action;
