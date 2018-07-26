@@ -232,7 +232,8 @@ function auth_start(state, action) {
     ...state,
     auth: {
       ...state.auth,
-      authenticating: true
+      authenticating: true,
+      authenticated: false
     }
   };
 }
@@ -257,7 +258,8 @@ function auth_fail(state, action) {
     ...state,
     auth: {
       ...state.auth,
-      authenticating: false
+      authenticating: false,
+      authenticated: false
     },
     errors: [...state.errors, action.error]
   };

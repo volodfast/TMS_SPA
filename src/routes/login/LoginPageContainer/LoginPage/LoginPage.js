@@ -10,9 +10,16 @@ export default props => {
   if (props.errors && props.errors.length !== 0) {
     errorsList = <ErrorList errors={props.errors} />;
   }
+
+  let loading = null;
+
+  if (props.authenticating) {
+    loading = <div style={{ fontSize: 48 }}>Loading...</div>;
+  }
   return (
     <div className="row">
       <div className="col-md-4 col-md-offset-4 login-page">
+        {loading}
         <h1>Log In</h1>
         {errorsList}
         <form>

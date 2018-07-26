@@ -26,7 +26,6 @@ class LoginPageContainer extends Component {
     const { email, password } = this.state;
 
     this.props.authStart(email, password);
-    nav("/");
   }
 
   handleEmailChange(e) {
@@ -41,20 +40,32 @@ class LoginPageContainer extends Component {
     });
   }
 
+  componentDidUpdate() {
+    if (this.props.authenticated) {
+      nav("/");
+    }
+  }
+
   render() {
     return (
-      <div>
-        <LoginPage
-          email={this.state.email}
-          password={this.state.password}
-          errors={this.state.errors}
-          handleEmailChange={this.handleEmailChange}
-          handlePasswordChange={this.handlePasswordChange}
-          authenticate={this.authenticate}
-        />
-      </div>
+      <LoginPage
+        authenticating={this.props.authenticating}
+        email={this.state.email}
+        password={this.state.password}
+        errors={this.state.errors}
+        handleEmailChange={this.handleEmailChange}
+        handlePasswordChange={this.handlePasswordChange}
+        authenticate={this.authenticate}
+      />
     );
   }
+}
+
+function mapStateToProps(state) {
+  return {
+    authenticated: state.auth.authenticated,
+    authenticating: state.auth.authenticating
+  };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -66,6 +77,6 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(LoginPageContainer);
