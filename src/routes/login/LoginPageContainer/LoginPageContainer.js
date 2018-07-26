@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import Axios from "axios";
 
 import LoginPage from "./LoginPage/LoginPage";
 import * as actions from "../../../store/actions/actions";
+
+import nav from "../../../history/nav";
 
 class LoginPageContainer extends Component {
   constructor(props) {
@@ -22,41 +23,10 @@ class LoginPageContainer extends Component {
 
   authenticate(e) {
     e.preventDefault();
-    let errNum = 1;
-    this.props.authStart();
-    Axios.post("/api/user_token", {
-      auth: {
-        email: this.state.email,
-        password: this.state.password
-      }
-    })
-      .then(res => {
-        errNum = 2;
-        this.setState({
-          email: "",
-          password: "",
-          errors: []
-        });
-        const user = res.data.user;
-        const token = res.data.jwt;
+    const { email, password } = this.state;
 
-        this.props.authSuccess(user, token);
-
-        Axios.defaults.headers["Authorization"] = "Bearer " + token;
-
-        this.props.loadAllTasksStart();
-      })
-      .catch(err => {
-        let errText = "Something went wrong!";
-        if (err.response.status === 401) {
-          errText = "Invalid email/password combination!";
-        }
-        if (errNum === 1) {
-          this.props.authFail(errText);
-        } else if (errNum === 2) {
-          this.props.loadAllTasksFail(errText);
-        }
-      });
+    this.props.authStart(email, password);
+    nav("/");
   }
 
   handleEmailChange(e) {
@@ -89,17 +59,8 @@ class LoginPageContainer extends Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    authStart: () => {
-      dispatch(actions.authStart());
-    },
-    authSuccess: (user, token) => {
-      dispatch(actions.authSuccess(user, token));
-    },
-    authFail: errMsg => {
-      dispatch(actions.authFail(errMsg));
-    },
-    loadAllTasksStart: () => {
-      dispatch(actions.loadAllTasksStart());
+    authStart: (email, password) => {
+      dispatch(actions.authStart(email, password));
     }
   };
 }

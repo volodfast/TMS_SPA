@@ -58,15 +58,15 @@ export const loadAllTasksFail = errMsg => {
 
 // AUTH actions
 
-export const authStart = () => {
+export const authStart = (email, password) => {
   return {
-    type: AUTH_START
+    type: AUTH_START,
+    email,
+    password
   };
 };
 
 export const authSuccess = (user, token) => {
-  localStorage.setItem("tms-jwt", token);
-  localStorage.setItem("tms-user-id", user.id);
   return {
     type: AUTH_SUCCESS,
     user: user

@@ -7,8 +7,6 @@ import {
   loadAllTasksSuccess
 } from "../../store/actions/actions";
 
-import nav from "../../history/nav";
-
 function* loadAllTasks() {
   try {
     const userId = yield select(state => state.user.id);

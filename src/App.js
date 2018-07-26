@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Route, withRouter, Switch } from "react-router-dom";
 import { connect } from "react-redux";
-import Axios from "axios";
 
 import Navigation from "./containers/Navigation/Navigation";
 import ProtectedRoute from "./containers/ProtectedRoute/ProtectedRoute";
@@ -23,41 +22,8 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    const token = localStorage.getItem("tms-jwt");
-    const userId = localStorage.getItem("tms-user-id");
-    if (token && userId) {
-      const baseUrl = `/api/users/${userId}`;
-
-      let errType = 1;
-      let errMsg = "Can't identify user by token!";
-      this.props.authStart();
-
-      Axios.get(baseUrl, {
-        headers: {
-          Authorization: "Bearer " + token
-        }
-      })
-        .then(res => {
-          errType = 2;
-          errMsg = "Can't load user tasks!";
-          this.props.authSuccess(res.data, token);
-
-          Axios.defaults.headers["Authorization"] = "Bearer " + token;
-
-          this.props.loadAllTasksStart();
-        })
-
-        .catch(err => {
-          if (errType === 1) {
-            this.props.authFail(errMsg);
-          } else if (errType === 2) {
-            this.props.loadAllTasksFail(errMsg);
-          }
-        });
-    }
+    this.props.authStart();
   }
-
-  componentDidMount() {}
 
   render() {
     const auth = this.props.authenticated;
@@ -115,15 +81,6 @@ const mapDispatchToProps = dispatch => {
   return {
     authStart: () => {
       dispatch(actions.authStart());
-    },
-    authSuccess: (user, token) => {
-      dispatch(actions.authSuccess(user, token));
-    },
-    authFail: errMsg => {
-      dispatch(actions.authFail(errMsg));
-    },
-    loadAllTasksStart: () => {
-      dispatch(actions.loadAllTasksStart());
     }
   };
 };
