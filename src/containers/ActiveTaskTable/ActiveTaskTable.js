@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 import TaskTableContainer from "../TaskTableContainer/TaskTableContainer";
 
@@ -33,9 +34,9 @@ class ActiveTaskTable extends Component {
 
     return (
       <TaskTableContainer
+        tasks={this.props.tasks}
         selectedIds={this.props.selectedActive}
         handleSelectedOnUnmount={this.props.addSelectedActiveTaskIdsToCache}
-        tasks={this.props.tasks}
         text={{
           default: "There are no active tasks! Create new one!",
           active: "Number of active tasks:"
@@ -75,3 +76,14 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(ActiveTaskTable);
+
+ActiveTaskTable.propTypes = {
+  tasks: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string,
+      priority: PropTypes.number,
+      due_date: PropTypes.string,
+      description: PropTypes.string
+    })
+  )
+};

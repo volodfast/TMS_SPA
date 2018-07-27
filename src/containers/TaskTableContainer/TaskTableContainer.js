@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 import TaskTableControls from "./TaskTableControls/TaskTableControls";
 import TaskTable from "./TaskTable/TaskTable";
@@ -11,7 +12,7 @@ class TaskTableContainer extends Component {
     super(props);
 
     this.state = {
-      selectedIds: this.props.selectedIds || []
+      selectedIds: props.selectedIds || []
     };
 
     this.onToggleSelect = this.onToggleSelect.bind(this);
@@ -239,3 +240,28 @@ export default connect(
   null,
   mapDispatchToProps
 )(TaskTableContainer);
+
+TaskTableContainer.propTypes = {
+  tasks: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string,
+      priority: PropTypes.number,
+      due_date: PropTypes.string,
+      description: PropTypes.string
+    })
+  ),
+  selectedIds: PropTypes.arrayOf(PropTypes.number),
+  handleSelectedOnUnmount: PropTypes.func,
+  text: PropTypes.shape({
+    default: PropTypes.string,
+    active: PropTypes.string
+  }),
+  handleSelected: PropTypes.shape({
+    text: PropTypes.string,
+    classes: PropTypes.string,
+    handler: PropTypes.func
+  }),
+  sortBy: PropTypes.string,
+  sortedHow: PropTypes.string,
+  changeSort: PropTypes.func
+};

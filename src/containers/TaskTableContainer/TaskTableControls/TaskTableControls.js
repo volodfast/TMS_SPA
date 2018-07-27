@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import "./TaskTableControls.css";
 
@@ -32,3 +33,15 @@ const TaskTableControls = props => {
 };
 
 export default TaskTableControls;
+
+TaskTableControls.propTypes = {
+  tasksNum: PropTypes.number,
+  text: PropTypes.shape({
+    default: PropTypes.string,
+    active: PropTypes.string
+  }),
+  checkAll: PropTypes.func,
+  uncheckAll: PropTypes.func,
+  deleteSelected: PropTypes.func,
+  button: PropTypes.object
+};

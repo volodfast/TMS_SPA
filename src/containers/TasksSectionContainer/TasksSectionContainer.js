@@ -24,10 +24,10 @@ class TaskSectionContainer extends Component {
   render() {
     return (
       <TasksSection
-        handleClickActive={this.handleClickActive}
-        handleClickFinished={this.handleClickFinished}
         activeTasks={this.props.activeTasks}
         finishedTasks={this.props.finishedTasks}
+        handleClickActive={this.handleClickActive}
+        handleClickFinished={this.handleClickFinished}
         activeTab={this.props.activeTab}
       />
     );

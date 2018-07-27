@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -82,3 +83,16 @@ const EditTaskPage = props => {
 };
 
 export default EditTaskPage;
+
+EditTaskPage.propTypes = {
+  title: PropTypes.string,
+  priority: PropTypes.number,
+  due_date: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  description: PropTypes.string,
+  errors: PropTypes.arrayOf(PropTypes.string),
+  handleSubmit: PropTypes.func,
+  handleTitleChange: PropTypes.func,
+  handlePriorityChange: PropTypes.func,
+  handleDueDateChange: PropTypes.func,
+  handleDescriptionChange: PropTypes.func
+};

@@ -1,11 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import ErrorList from "../../../../components/ErrorList/ErrorList";
 
 import "./LoginPage.css";
 
-export default props => {
+const LoginPage = props => {
   let errorsList = null;
   if (props.errors && props.errors.length !== 0) {
     errorsList = <ErrorList errors={props.errors} />;
@@ -65,4 +66,16 @@ export default props => {
       </div>
     </div>
   );
+};
+
+export default LoginPage;
+
+LoginPage.propTypes = {
+  authenticating: PropTypes.bool,
+  email: PropTypes.string,
+  password: PropTypes.string,
+  errors: PropTypes.arrayOf(PropTypes.string),
+  handleEmailChange: PropTypes.func,
+  handlePasswordChange: PropTypes.func,
+  authenticate: PropTypes.func
 };

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 import TaskTableContainer from "../TaskTableContainer/TaskTableContainer";
 
@@ -33,9 +34,9 @@ class FinishedTaskTable extends Component {
 
     return (
       <TaskTableContainer
+        tasks={this.props.tasks}
         selectedIds={this.props.selectedFinished}
         handleSelectedOnUnmount={this.props.addSelectedFinishedTaskIdsToCache}
-        tasks={this.props.tasks}
         text={{
           default: "There are no finished tasks!",
           active: "Number of finished tasks:"
@@ -75,3 +76,14 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(FinishedTaskTable);
+
+FinishedTaskTable.propTypes = {
+  tasks: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string,
+      priority: PropTypes.number,
+      due_date: PropTypes.string,
+      description: PropTypes.string
+    })
+  )
+};

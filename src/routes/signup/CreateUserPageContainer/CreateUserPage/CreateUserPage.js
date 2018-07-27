@@ -1,10 +1,11 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import ErrorList from "../../../../components/ErrorList/ErrorList";
 
 import "./CreateUserPage.css";
 
-export default props => {
+const CreateUserPage = props => {
   let errors = null;
   if (props.errors && props.errors.length !== 0) {
     errors = <ErrorList errors={props.errors} />;
@@ -77,4 +78,22 @@ export default props => {
       </div>
     </div>
   );
+};
+
+export default CreateUserPage;
+
+CreateUserPage.propTypes = {
+  user: PropTypes.shape({
+    first_name: PropTypes.string,
+    last_name: PropTypes.string,
+    email: PropTypes.string,
+    password: PropTypes.string,
+    password_confirmation: PropTypes.string
+  }),
+  handleFirstNameChange: PropTypes.func,
+  handleLastNameChange: PropTypes.func,
+  handleEmailChange: PropTypes.func,
+  handlePasswordChange: PropTypes.func,
+  handlePasswordConfirmationChange: PropTypes.func,
+  handleSubmit: PropTypes.func
 };

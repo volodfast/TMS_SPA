@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import { formatTitle, formatDate } from "../../../../helpers/helpers";
 
@@ -42,3 +43,13 @@ const Task = props => {
 };
 
 export default Task;
+
+Task.propTypes = {
+  title: PropTypes.string,
+  priority: PropTypes.number,
+  due_date: PropTypes.string,
+  description: PropTypes.string,
+  selected: PropTypes.bool,
+  onToggleSelect: PropTypes.func,
+  handleDelete: PropTypes.func
+};

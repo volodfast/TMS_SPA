@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 import WaitToLogInPage from "../../components/WaitToLogInPage/WaitToLogInPage";
 
@@ -47,3 +48,10 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(ProtectedRoute);
+
+ProtectedRoute.propTypes = {
+  path: PropTypes.string,
+  authenticated: PropTypes.bool,
+  exact: PropTypes.bool,
+  component: PropTypes.func
+};

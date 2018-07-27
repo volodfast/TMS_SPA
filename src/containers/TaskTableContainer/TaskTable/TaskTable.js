@@ -1,4 +1,6 @@
 import React from "react";
+import PropTypes from "prop-types";
+
 import Task from "./Task/Task";
 
 import "./TaskTable.css";
@@ -55,3 +57,20 @@ const TaskTable = props => {
 };
 
 export default TaskTable;
+
+TaskTable.propTypes = {
+  tasks: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string,
+      priority: PropTypes.number,
+      due_date: PropTypes.string,
+      description: PropTypes.string
+    })
+  ),
+  selectedTaskIds: PropTypes.arrayOf(PropTypes.number),
+  onToggleSelect: PropTypes.func,
+  deleteTask: PropTypes.func,
+  clickTitle: PropTypes.func,
+  clickPriority: PropTypes.func,
+  clickDueDate: PropTypes.func
+};

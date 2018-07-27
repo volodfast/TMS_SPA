@@ -1,7 +1,8 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
+import PropTypes from "prop-types";
 
-export default props => {
+const WaitToLoginPage = props => {
   if (props.authenticating) {
     return <div>Wait to check if you are logged in...</div>;
   }
@@ -10,3 +11,11 @@ export default props => {
   }
   return <Redirect to="/login" />;
 };
+
+WaitToLoginPage.propTypes = {
+  path: PropTypes.string,
+  authenticated: PropTypes.bool,
+  authenticating: PropTypes.bool
+};
+
+export default WaitToLoginPage;

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import ErrorList from "../../../../../components/ErrorList/ErrorList";
 
@@ -85,3 +86,20 @@ const EditUserPage = props => {
 };
 
 export default EditUserPage;
+
+EditUserPage.propTypes = {
+  user: PropTypes.shape({
+    first_name: PropTypes.string,
+    last_name: PropTypes.string,
+    email: PropTypes.string,
+    password: PropTypes.string,
+    password_confirmation: PropTypes.string
+  }),
+  errors: PropTypes.arrayOf(PropTypes.string),
+  handleFirstNameChange: PropTypes.func,
+  handleLastNameChange: PropTypes.func,
+  handleEmailChange: PropTypes.func,
+  handlePasswordChange: PropTypes.func,
+  handlePasswordConfirmationChange: PropTypes.func,
+  handleSubmit: PropTypes.func
+};

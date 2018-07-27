@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import { formatDate } from "../../../../../helpers/helpers";
 
@@ -68,3 +69,11 @@ const ShowTaskPage = props => {
 };
 
 export default ShowTaskPage;
+
+ShowTaskPage.propTypes = {
+  title: PropTypes.string,
+  priority: PropTypes.number,
+  due_date: PropTypes.string,
+  description: PropTypes.string,
+  handleDelete: PropTypes.func
+};

@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -80,3 +81,13 @@ const CreateTaskPage = props => {
 };
 
 export default CreateTaskPage;
+
+CreateTaskPage.propTypes = {
+  due_date: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  handleTitleChange: PropTypes.func,
+  handlePriorityChange: PropTypes.func,
+  handleDueDateChange: PropTypes.func,
+  handleDescriptionChange: PropTypes.func,
+  handleSubmit: PropTypes.func,
+  errors: PropTypes.arrayOf(PropTypes.string)
+};

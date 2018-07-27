@@ -1,11 +1,12 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import ActiveTaskTable from "../../ActiveTaskTable/ActiveTaskTable";
 import FinishedTaskTable from "../../FinishedTaskTable/FinishedTaskTable";
 
 import "./TasksSection.css";
 
-const TaskTables = props => {
+const TaskSection = props => {
   let activeTabStyle = "";
   if (props.activeTab === "active") {
     activeTabStyle = "active";
@@ -39,4 +40,26 @@ const TaskTables = props => {
   );
 };
 
-export default TaskTables;
+export default TaskSection;
+
+TaskSection.propTypes = {
+  activeTasks: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string,
+      priority: PropTypes.number,
+      due_date: PropTypes.string,
+      description: PropTypes.string
+    })
+  ),
+  finishedTasks: PropTypes.arrayOf(
+    PropTypes.shape({
+      title: PropTypes.string,
+      priority: PropTypes.number,
+      due_date: PropTypes.string,
+      description: PropTypes.string
+    })
+  ),
+  handleClickActive: PropTypes.func,
+  handleClickFinished: PropTypes.func,
+  activeTab: PropTypes.string
+};
