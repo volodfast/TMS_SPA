@@ -20,7 +20,6 @@ class EditTaskPageContainer extends Component {
         due_date: moment().valueOf(),
         description: ""
       };
-      this.empty = true;
     }
 
     this.state = {
@@ -131,19 +130,34 @@ class EditTaskPageContainer extends Component {
     return task;
   }
 
-  render() {
-    const task = { ...this.state };
+  static getDerivedStateFromProps(props, prevState) {
+    if (props.loaded) {
+      const taskId = +props.match.params.task_id;
+      const task = props.activeTasks
+        .concat(props.finishedTasks)
+        .reduce((a, b) => {
+          if (b.id === taskId) return b;
+          return a;
+        }, null);
 
-    if (this.empty === true) {
-      return (
-        <div style={{ fontSize: "24px", marginTop: "15px" }}>
-          You have no such task!
-        </div>
-      );
+      if (task) {
+        return {
+          title: task.title,
+          priority: task.priority,
+          due_date: task.due_date,
+          description: task.description,
+          empty: false
+        };
+      }
     }
+    return null;
+  }
+
+  render() {
     return (
       <EditTaskPage
-        {...task}
+        {...this.state}
+        loading={this.props.loading}
         errors={this.state.errors}
         handleSubmit={this.handleSubmit}
         handleTitleChange={this.handleTitleChange}
@@ -158,7 +172,9 @@ class EditTaskPageContainer extends Component {
 function mapStateToProps(state) {
   return {
     activeTasks: state.tasks.active,
-    finishedTasks: state.tasks.finished
+    finishedTasks: state.tasks.finished,
+    loading: state.tasks.load.loading,
+    loaded: state.tasks.load.loaded
   };
 }
 

@@ -18,6 +18,14 @@ const EditTaskPage = props => {
     errors = <ErrorList errors={props.errors} />;
   }
 
+  if (props.loading) {
+    return <div className="edit-task-statusInfo">Loading task...</div>;
+  }
+
+  if (props.title.length === 0) {
+    return <div className="edit-task-statusInfo">You have no such task!</div>;
+  }
+
   return (
     <div className="edit-task-container">
       <button onClick={history.goBack} className="btn btn-primary back-button">
@@ -89,6 +97,7 @@ EditTaskPage.propTypes = {
   priority: PropTypes.number,
   due_date: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   description: PropTypes.string,
+  loading: PropTypes.bool,
   errors: PropTypes.arrayOf(PropTypes.string),
   handleSubmit: PropTypes.func,
   handleTitleChange: PropTypes.func,

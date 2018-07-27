@@ -24,3 +24,8 @@
   position: absolute;
   width: 150px;
 }
+
+.edit-task-statusInfo {
+  font-size: 24px; 
+  margin-top: 15px; 
+}

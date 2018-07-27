@@ -64,7 +64,10 @@ const initialState = {
       by: "priority",
       how: "desc"
     },
-    loading: false,
+    load: {
+      loading: false,
+      loaded: false
+    },
     activeTab: "active",
     creation: {
       creating: false,
@@ -188,7 +191,10 @@ function load_all_tasks_start(state, action) {
     ...state,
     tasks: {
       ...state.tasks,
-      loading: true
+      load: {
+        loading: true,
+        loaded: false
+      }
     }
   };
 }
@@ -210,7 +216,10 @@ function load_all_tasks_success(state, action) {
       ...state.tasks,
       active: activeTasks,
       finished: finishedTasks,
-      loading: false
+      load: {
+        loading: false,
+        loaded: true
+      }
     }
   };
 }
@@ -220,7 +229,10 @@ function load_all_tasks_fail(state, action) {
     ...state,
     tasks: {
       ...state.tasks,
-      loading: false
+      load: {
+        loading: false,
+        loaded: true
+      }
     }
   };
 }
