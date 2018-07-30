@@ -14,9 +14,9 @@
     "yarn": "1.7.0"
   },
   "scripts": {
-    "build": "yarn --cwd client install && yarn --cwd client build",
+    "build": "cd client && npm install && npm run build && cd ..",
     "deploy": "cp -a client/build/. public/",
-    "heroku-postbuild": "yarn build && yarn deploy"
+    "postinstall": "npm run build && npm run deploy && echo 'Client built!'"
   },
   "author": "",
   "license": "ISC"
