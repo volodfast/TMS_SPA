@@ -10,8 +10,7 @@
   "dependencies": {},
   "devDependencies": {},
   "engines": {
-    "node": "8.11.3",
-    "yarn": "1.7.0"
+    "node": "8.11.3"
   },
   "scripts": {
     "build": "cd client && npm install && npm run build && cd ..",
