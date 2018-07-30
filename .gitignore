@@ -26,4 +26,4 @@
 /config/master.key
 
 # Ignore client foulder
-/client/*
+# /client/*
