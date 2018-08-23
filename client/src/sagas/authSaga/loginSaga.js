@@ -49,7 +49,11 @@ function* login(action) {
       }
     }
   } catch (error) {
-    yield put(authFail());
+    let errorMessage = "";
+    if (error.response && error.response.status === 404) {
+      errorMessage = "Invalid email/password combination!";
+    }
+    yield put(authFail(errorMessage));
   }
 }
 

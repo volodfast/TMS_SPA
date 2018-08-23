@@ -12,8 +12,7 @@ class LoginPageContainer extends Component {
 
     this.state = {
       email: "",
-      password: "",
-      errors: []
+      password: ""
     };
 
     this.authenticate = this.authenticate.bind(this);
@@ -60,7 +59,7 @@ class LoginPageContainer extends Component {
         authenticating={this.props.authenticating}
         email={this.state.email}
         password={this.state.password}
-        errors={this.state.errors}
+        errors={this.props.errors}
         handleEmailChange={this.handleEmailChange}
         handlePasswordChange={this.handlePasswordChange}
         authenticate={this.authenticate}
@@ -72,7 +71,8 @@ class LoginPageContainer extends Component {
 function mapStateToProps(state) {
   return {
     authenticated: state.auth.authenticated,
-    authenticating: state.auth.authenticating
+    authenticating: state.auth.authenticating,
+    errors: state.errors
   };
 }
 
