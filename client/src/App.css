@@ -1,0 +1,17 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+.App {
+  text-align: center;
+}
+
+body {
+  /* temporary fix for login page (!important) */
+  padding-top: 60px !important;
+}

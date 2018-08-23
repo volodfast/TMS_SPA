@@ -1,0 +1,19 @@
+.task .edit_task,
+.task .delete_task {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateX(50px);
+    transition: all 0.2s;
+}
+
+.task:hover .edit_task,
+.task:hover .delete_task {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+.task .edit_task a,
+.task .delete_task a{
+    width: 90%;
+}
